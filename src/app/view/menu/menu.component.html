@@ -1,0 +1,76 @@
+<div id="main-container">
+
+ 
+    <header role="banner">
+        <mat-toolbar color="#FAFAFA" class="example-toolbar">
+
+            <h1 class="app-name"> MENUS: </h1>
+            <span class="spacer"></span>
+            <button mat-button fxShow.lt-md="false" fxShow.gt-sm="true" matTooltip="Reporte Excel">
+                <img src="../../../assets/iconos/icono_excel.png" height="35px" alt="x" />
+            </button>
+            <button mat-button fxShow.lt-md="false" fxShow.gt-sm="true"   matTooltip="Reporte PDF">
+                <img src="../../../assets/iconos/icono_pdf.png" height="35px" alt="x" />
+            </button>
+    
+
+     
+        </mat-toolbar>
+    </header>
+    
+    <div>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Buscar Menú</mat-label>
+            <input class="toolbar-search" type="text" matInput (keyup)="filter($event.target.value)">
+            <mat-placeholder>Search</mat-placeholder>
+        <mat-icon matSuffix style="font-size: 2.0em">search</mat-icon>
+        </mat-form-field>
+    </div>
+
+
+    <div>
+        <mat-table [dataSource]="dataSource" matSort style="color: white;">
+            <ng-container matColumnDef="nidmenu" >
+                <mat-header-cell *matHeaderCellDef mat-sort-header style="background-color: rgb(153, 153, 153);  color: rgb(255, 255, 255);"> ID </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.nidMenu}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="snombremenu">
+                <mat-header-cell *matHeaderCellDef mat-sort-header style="background-color:  rgb(153, 153, 153);  color: rgb(255, 255, 255);"> Nombre </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.snombreMenu}}</mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="modulo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header style="background-color: rgb(153, 153, 153); color: rgb(255, 255, 255);"> Nombre </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.modulo.snombreModulo}}</mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="acciones" >
+                <mat-header-cell *matHeaderCellDef  style="background-color:  rgb(153, 153, 153); text-align:center; color: rgb(255, 255, 255);">Acciones</mat-header-cell>
+                <mat-cell *matCellDef="let row" >
+                    <button mat-icon-button color="primary" (click)="openDialog(row)">
+                        <mat-icon>ballot</mat-icon>
+                    </button>
+                    <button mat-icon-button color="accent" (click)="eliminar(row)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+         
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" [length]="cantidad" (page)="mostrarMas($event)" style="background-color: darkgrey; color: white;" >
+        </mat-paginator>
+      
+        <button mat-fab color="accent" style="float: right" (click)="openDialog()">
+            <mat-icon>add_circle</mat-icon>
+        </button>
+    
+    
+    </div>
+    
+ 
+    
+</div>

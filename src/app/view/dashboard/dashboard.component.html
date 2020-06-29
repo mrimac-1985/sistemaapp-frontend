@@ -1,0 +1,51 @@
+
+<div id="main-container">
+    <h1>Ejemplo Dashboard:</h1>
+
+
+    <!-- <section  fxLayout="row" fxLayoutAlign="center center">
+    
+        <div class="tp-container"  fxFlexOrder="3"  fxLayoutGap="20px">
+            <canvas id="canvas">{{ chart }}</canvas>
+            <canvas id="bar">{{ chart }}</canvas> 
+            <canvas id="doughnut">{{ chart }}</canvas>   
+        </div>
+    
+    </section> -->
+    
+    
+    <div fxLayout="row" fxLayoutAlign="space-around center" >
+    
+        <div style="width: 30%;   ">
+            <canvas id="canvas">{{ chart }}</canvas>
+            
+        </div>
+    
+        <div style="width: 30%;  ">
+            <canvas id="bar">{{ chart }}</canvas>        
+        </div>
+        
+        <div style="width: 30%;   ">
+            <canvas id="doughnut">{{ chart }}</canvas>        
+        </div>
+        
+     </div>
+     
+     <div fxLayout="row" fxLayoutAlign="space-around center" > 
+    
+        <div style="width: 30%;   ">
+            <canvas id="pie">{{ chart }}</canvas>
+            
+        </div>
+    
+        <div style="width: 30%;  ">
+            <canvas id="polarArea">{{ chart }}</canvas>        
+        </div>
+        
+        <div style="width: 30%;   ">
+            <canvas id="radar">{{ chart }}</canvas>        
+        </div>
+        
+     </div>
+    
+</div>

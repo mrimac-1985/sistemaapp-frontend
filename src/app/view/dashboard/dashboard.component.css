@@ -1,0 +1,13 @@
+#main-container{
+	margin: 1% auto;
+	width: 95%;
+}
+
+.tp-container {
+    display: flex;
+    flex-direction: column;   
+ }
+ .tp-container > * {
+    width: 100%;
+    
+ }

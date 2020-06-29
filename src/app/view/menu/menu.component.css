@@ -1,0 +1,36 @@
+#main-container{
+	margin: 1% auto;
+	width: 95%;
+}
+
+.spacer {
+	flex: 1 1 auto;
+  }
+
+ 
+  .columnstyle {
+	background-color: cornflowerblue; 
+	text-align:center; 
+	color: rgb(255, 255, 255);
+  }
+
+
+  .container-2{
+	width: 300px;
+	vertical-align: middle;
+	white-space: nowrap;
+	position: relative;
+  }
+
+ 
+
+
+
+
+
+
+
+
+
+
+  

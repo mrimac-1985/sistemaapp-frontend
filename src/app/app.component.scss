@@ -1,0 +1,265 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+ 
+/*
+  https://github.com/webpack-contrib/sass-loader/issues/530
+ * Actual Sticky Footer Styles
+ */
+.all-wrap {
+  min-height: 100vh;
+}
+ 
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+ 
+.content {
+  flex: 1;
+}
+ 
+ 
+/*
+ * Make the Component injected by Router Outlet full height:
+ */
+main {
+  display: flex;
+  flex-direction: column;
+  > *:not(router-outlet) {
+    flex: 1;
+    display: block;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+// .footer{
+//   text-align: center;
+// }
+
+
+
+/* ----------- INICIO FOOTER-----------------------------*/
+
+/*modelo de FOOTER*/
+// https://codepen.io/ahmadbassamemran/pen/bXRPdr
+
+/*  footer   */
+footer {
+  background-color: #222;
+  color: #fff;
+  font-size: 14px;
+  bottom: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 999;
+}
+
+footer p {
+  margin: 10px 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida  Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+footer .fa-heart{
+  color: red;
+}
+footer .fa-dev{
+  color: #fff;
+}
+footer .fa-twitter-square{
+color:#1da0f1;
+}
+footer .fa-instagram{
+color: #f0007c;
+}
+fotter .fa-linkedin{
+color:#0073b1;
+}
+footer .fa-codepen{
+color:#fff
+}
+footer a {
+  color: #3c97bf;
+  text-decoration: none;
+margin-right:5px;
+}
+
+
+/* ----------- FIN FOOTER-----------------------------*/
+
+
+
+
+
+
+
+/* ----------- INICIO LOADER-----------------------------*/
+
+/*SPINNER*/
+
+#overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: block; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(60, 138, 255, 0.1); /* Black background with opacity */
+  opacity: 0.5;
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: progress; /* Add a pointer on hover */
+}
+
+.content2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  color: white;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #ff0000;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 3s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// /* Add animation to "page content" */
+// .animate-bottom {
+//   position: relative;
+//   -webkit-animation-name: animatebottom;
+//   //-webkit-animation-duration: 1s;
+//   animation-name: animatebottom;
+//   //animation-duration: 1s
+// }
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+
+/*EJEMPOLO*/
+/*https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_loader5*/
+/*-----------------------------*/
+
+/* ----------- FIN  LOADER-----------------------------*/
+
+
+ 
+
+.aligned-with-icon{
+  position: absolute;
+  margin-top: 4px;
+  margin-left: 10px; /* optional */
+}
+
+
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+ .example-sidenav-container {
+  flex: 1;
+}
+
+.example-sidenav{
+  color: #d36423;
+}
+
+.mat-list-item{
+  color: black;
+  opacity: 0.8;
+}
+
+.mat-drawer{
+  opacity: 0.9;
+  background:White;
+}
+
+.mat-toolbar {
+  opacity: 0.9;
+  background: #e51282;
+  color: white;
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #e8ded7;
+  opacity: 0.9;
+}
+
+.example-toolbar {
+    z-index: 2;
+}
+
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+
+
+/*PRUEBA DE STILO MENU*/
+
+.menupequeño{
+  width: 75px;
+}
+
+.menugrande{
+  width: 230px;
+}
+
+
+
+
+
