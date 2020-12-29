@@ -19,22 +19,29 @@
         </div>
          
         <div style="margin-top: 20px; ">
-            <div class="tp-container" fxFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" >
+            <div class="tp-container" fxFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="1px" >
                 
                 <!-- <h2 class="app-name" style="width: 100%;" >Lista de Usuarios:</h2> -->
-    
-                <mat-form-field class="example-full-width" appearance="outline" style="width: 100%; margin-right: 10px;">
-                    <mat-label>Buscar Usuario</mat-label>
-                    <input class="toolbar-search" type="text" matInput >
-                    <mat-placeholder>Search</mat-placeholder>
-                    <mat-icon matSuffix style="font-size: 2.0em">search</mat-icon>
-                </mat-form-field>
-    
-                <mat-dialog-actions style="width: 100%;" fxLayoutAlign="center center">
-                    <button mat-raised-button color="primary" (click)="openDialog()">  Nuevo   </button>
-                    <button mat-raised-button color="primary" (click)="openDialog()">  Filtros  </button> 
-                    <button mat-raised-button color="primary" (click)="openDialog()">  Reportes  </button> 
-                </mat-dialog-actions>
+                <div class="example-full-width" style="width: 50%;" >
+                    <mat-form-field  appearance="outline" style="  margin-right: 10px;">
+                        <mat-label>Buscar por nombre de operador</mat-label>
+                        <input class="toolbar-search" type="text" matInput >                        
+                        <mat-icon matSuffix style="font-size: 2.0em">search</mat-icon>
+                        
+                    </mat-form-field>        
+                    <button style="margin-top: -50px; height: 55px;" mat-raised-button color="primary" (click)="openDialog()"><mat-icon>new_releases</mat-icon>  Nuevo   </button>                                            
+            
+                </div>   
+                
+                <div style="width: 50%;" >
+                    
+                    <form id="search-box"  [formGroup]="formBuscar" (ngSubmit)="buscar()" >
+                        <input id="search-form" type="text" placeholder="Buscar por nombre de Operador"  formControlName="palabraclave"  >
+                        <button id="search-button" type="submit"  ></button>
+                    </form>
+                                              
+                        
+                </div>
                 
             </div>
     
@@ -66,7 +73,7 @@
                     </ng-container>
                     <ng-container matColumnDef="estado">
                         <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Estado </mat-header-cell>
-                        <mat-cell   *matCellDef="let row" class="rowStilo" [ngClass]="row.estado == 'DESACTIVADO' ? 'Desctivado' : 'Activado'" > {{row.operador.estado}}</mat-cell>
+                        <mat-cell   *matCellDef="let row" class="rowStilo" [ngClass]="row.operador.estado == 'DESACTIVADO' ? 'Desctivado' : 'Activado'" > {{row.operador.estado}}</mat-cell>
                     </ng-container>
 
 

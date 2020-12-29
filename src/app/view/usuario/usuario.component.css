@@ -106,3 +106,64 @@
   .Activado{
 	color:#4a964a;
 }
+
+
+
+
+
+#search-box {
+	height: 43px;
+	width: 100%;
+	 }
+  
+  #search-box #search-form, #search-box #search-button {
+	box-sizing: border-box;
+	height: 100%; 
+	}
+  
+  #search-box #search-form {
+	width: 85%;
+	border: 1px solid #ccc;
+	border-right: none;
+	border-radius: 5px 0 0 5px;
+	box-shadow: 0 1px 0 rgba(8, 23, 38, 0.02) inset, 0 0 2px rgba(8, 23, 38, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.2);
+	padding: 0 4px;
+	outline: none;
+	float: left; }
+  
+  #search-box #search-form:focus {
+	outline: none;
+	border: 2px solid #47b98f; }
+  
+  #search-box #search-button {
+	width: 15%;
+	border: 1px solid #47b98f;
+	border-radius: 0 5px 5px 0;
+	background: url("../../../assets/iconos/search_w.png") center center no-repeat;
+	background-color: #47b98f;
+	float: right;
+	position: relative;	
+	left: -2px; 
+	cursor: pointer;}
+  
+  #search-box #search-button:hover, #search-box #search-button:active {
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out; }
+  
+  #search-box #search-button:hover {
+	border: 1px solid #37a97f;
+	background-color: #37a97f; }
+  
+  #search-box #search-button:active {
+	outline: none;
+	border: 1px solid #1b8d6d;
+	background-color: #1b8d6d; }
+  
+  /* For Smartphone */
+  @media only screen and (max-width: 480px) {
+	#search-box #search-button:hover {
+	  border: 1px solid #47b98f;
+	  background-color: #47b98f; } }

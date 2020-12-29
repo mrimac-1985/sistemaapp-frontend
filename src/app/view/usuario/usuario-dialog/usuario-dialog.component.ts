@@ -81,32 +81,25 @@ export class UsuarioDialogComponent implements OnInit {
     this.operador = new Operador();
     this.usuario = new Usuario();
  
-
-    console.info('cargar datos '+this.data_dialog.operador );
+ 
 
     if (this.data_dialog.operador!= null) {
       // this.cargarDatosDelUsuario(this.data_dialog.operador.nidoperador);
       
       this.operadorDto = this.data_dialog;
-      this.nombreboton = 'Actualizar';
-      console.log('actualizar datos');
+      this.nombreboton = 'Actualizar'; 
       
 
-    } else {
-        console.log('carga sin datos');
+    } else { 
         
       this.operador.usuario =  this.usuario;
       this.operadorDto.operador = this.operador;
       this.nombreboton = 'Registrar';
     }
-
-
-    //console.info('cargar datos'+this.operadorDto.operador.nidoperador);
-    console.log('actualizar'+this.operadorDto.operador.snumdocu);
-
+ 
   
     this.formOperador = this.formBuilder.group({
-      nidoperador:  new FormControl(this.operadorDto.operador.nidoperador, Validators.required ) , 
+      nidoperador:  new FormControl(this.operadorDto.operador.nidoperador ) , 
       sidtipodoc:  new FormControl(this.operadorDto.operador.sidtipodoc, Validators.required) , 
       snumdocu:  new FormControl(this.operadorDto.operador.snumdocu, [Validators.required , Validators.minLength(8),Validators.maxLength(15)]) , 
       snombre:  new FormControl(this.operadorDto.operador.snombre, Validators.required) , 
@@ -117,17 +110,13 @@ export class UsuarioDialogComponent implements OnInit {
       stelefono:  new FormControl(this.operadorDto.operador.stelefono, Validators.required) , 
       sgenero:  new FormControl(this.operadorDto.operador.sgenero, Validators.required) , 
       sdireccion:  new FormControl(this.operadorDto.operador.sdireccion, Validators.required) , 
-      sobservacion:  new FormControl(this.operadorDto.operador.sobservacion, Validators.required) , 
+      sobservacion:  new FormControl(this.operadorDto.operador.sobservacion, ) , 
       slogin:  new FormControl(this.operadorDto.operador.usuario.slogin, Validators.required) , 
       spassword:  new FormControl(this.operadorDto.operador.usuario.spassword, Validators.required) , 
       idare:  new FormControl(this.operadorDto.nidarea, Validators.required) , 
       idperfil:  new FormControl(this.operadorDto.nidperfil, Validators.required) , 
       idRol:  new FormControl(this.operadorDto.nidrol, Validators.required) 
     });
-
-
-
-
 
   }
 
@@ -163,6 +152,7 @@ export class UsuarioDialogComponent implements OnInit {
     operadorDto.nidperfil = this.formOperador.value['idperfil'];
     operadorDto.nidrol = this.formOperador.value['idRol'];
 
+    console.log('registra');    
 
     if (this.formOperador.valid) {
       /** PARA MODIFICAR EL USUARIO */
@@ -177,6 +167,7 @@ export class UsuarioDialogComponent implements OnInit {
         this.dialogRef.close();
       } else {
       /** PARA REGISTRAR EL USUARIO */
+      
         this.operadorServicio
           .registrar(operadorDto)
           .subscribe((RespuestaBase) => {
@@ -186,7 +177,11 @@ export class UsuarioDialogComponent implements OnInit {
         this.LimpiarForm();
         this.dialogRef.close();
       }
+    }else {
+      console.log('formulario no valido');
+      
     }
+
   }
 
   LimpiarForm() {
@@ -222,6 +217,7 @@ export class UsuarioDialogComponent implements OnInit {
   }
 
   cancelar() {
+    this.  LimpiarForm();
     this.dialogRef.close();
   }
 

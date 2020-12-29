@@ -31,6 +31,7 @@
                 <mat-form-field appearance="outline" >
                     <mat-label>Número Documento:</mat-label>
                     <input  matInput   formControlName="snumdocu" required /> 
+                    <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
                     <div  *ngIf="!_validator.isValid('snumdocu', formOperador)">
                         <span style="color: #f4516c;">
                             {{ _validator.errorMessage }}
@@ -44,6 +45,7 @@
                 <mat-form-field appearance="outline" >
                     <mat-label>Nombre:</mat-label>
                     <input matInput  required formControlName="snombre" required  minlength="2" maxlength ="30">
+                    <mat-icon matSuffix style="font-size: 1.5em">text_fields</mat-icon>
                     <div *ngIf="!_validator.isValid('snombre', formOperador)">
                         <span style="color: #f4516c;">
                             {{ _validator.errorMessage }}
@@ -54,6 +56,7 @@
                 <mat-form-field appearance="outline" >
                     <mat-label>Apellido Paterno:</mat-label>
                     <input matInput  required formControlName="sapepaterno">
+                    <mat-icon matSuffix style="font-size: 1.5em">text_fields</mat-icon>
                     <div  *ngIf="!_validator.isValid('sapepaterno', formOperador)">
                         <span style="color: #f4516c;">
                             {{ _validator.errorMessage }}
@@ -66,6 +69,7 @@
                 <mat-form-field appearance="outline" >
                     <mat-label>Apellido Materno:</mat-label>
                     <input matInput  required formControlName="sapematerno"  required  minlength="2" maxlength ="30">
+                    <mat-icon matSuffix style="font-size: 1.5em">text_fields</mat-icon>
                     <div  *ngIf="!_validator.isValid('sapematerno', formOperador)">
                         <span style="color: #f4516c;">
                             {{ _validator.errorMessage }}
@@ -94,11 +98,22 @@
                         <mat-option  value="F">FEMENINO</mat-option>
                         <mat-option  value="O">OTROS</mat-option>
                       </mat-select>
+                      <div  *ngIf="!_validator.isValid('sgenero', formOperador)">
+                        <span style="color: #f4516c;">
+                            {{ _validator.errorMessage }}
+                        </span>
+                    </div>
                 </mat-form-field>          
 
                 <mat-form-field appearance="outline" >
                     <mat-label>Telefono:</mat-label>
                     <input matInput  required formControlName="stelefono" required  maxlength ="12">
+                    <mat-icon matSuffix style="font-size: 1.5em">phone</mat-icon>
+                    <div  *ngIf="!_validator.isValid('stelefono', formOperador)">
+                        <span style="color: #f4516c;">
+                            {{ _validator.errorMessage }}
+                        </span>
+                    </div>
                 </mat-form-field>                                   
             </div>
              
@@ -106,6 +121,12 @@
                 <mat-form-field appearance="outline" >
                     <mat-label>Dirección:</mat-label>
                     <input matInput  required formControlName="sdireccion"   maxlength ="50">
+                    <mat-icon matSuffix style="font-size: 1.5em">text_fields</mat-icon>
+                    <div  *ngIf="!_validator.isValid('sdireccion', formOperador)">
+                        <span style="color: #f4516c;">
+                            {{ _validator.errorMessage }}
+                        </span>
+                    </div>
                 </mat-form-field>                                   
             </div>
 
@@ -113,7 +134,8 @@
                 <mat-form-field appearance="outline" >
                     <mat-label>Correo Electrónico:</mat-label>
                     <input matInput  required formControlName="scorreo"  >
-                    <div *ngIf="!_validator.isValid('scorreo', formOperador)">
+                    <mat-icon matSuffix style="font-size: 1.5em">email</mat-icon>
+                    <div  *ngIf="!_validator.isValid('scorreo', formOperador)">
                         <span style="color: #f4516c;">
                             {{ _validator.errorMessage }}
                         </span>
@@ -124,6 +146,12 @@
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>Observación:</mat-label>
                     <textarea matInput formControlName="sobservacion"  maxlength ="100"></textarea>
+                    <mat-icon matSuffix style="font-size: 1.5em">text_format</mat-icon>
+                    <div  *ngIf="!_validator.isValid('sobservacion', formOperador)">
+                        <span style="color: #f4516c;">
+                            {{ _validator.errorMessage }}
+                        </span>
+                    </div>
                 </mat-form-field>                    
             </div>
 
@@ -138,21 +166,52 @@
                     <mat-form-field appearance="outline" >
                         <mat-label style="font-size:18px">Usuario:</mat-label>
                         <input matInput  required formControlName="slogin">
+                        <mat-icon matSuffix style="font-size: 1.5em">person_pin</mat-icon>
+                        <div  *ngIf="!_validator.isValid('slogin', formOperador)">
+                            <span style="color: #f4516c;">
+                                {{ _validator.errorMessage }}
+                            </span>
+                        </div>
                     </mat-form-field>
             
                     <mat-form-field appearance="outline" >
                         <mat-label style="font-size:18px">Contraseña:</mat-label>
                         <input matInput type="password" required formControlName="spassword">
+                        <mat-icon matSuffix style="font-size: 1.5em">vpn_key</mat-icon>
+                        <div  *ngIf="!_validator.isValid('spassword', formOperador)">
+                            <span style="color: #f4516c;">
+                                {{ _validator.errorMessage }}
+                            </span>
+                        </div>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" >
                         <mat-label style="font-size:18px">Confirmar contraseña:</mat-label>
                         <input matInput type="password" required formControlName="spassword">
+                        <mat-icon matSuffix style="font-size: 1.5em">vpn_key</mat-icon>
+                        <div  *ngIf="!_validator.isValid('spassword', formOperador)">
+                            <span style="color: #f4516c;">
+                                {{ _validator.errorMessage }}
+                            </span>
+                        </div>
                     </mat-form-field>
 
                 </div>
 
                 <div class="tp-container"  fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
+                    <mat-form-field appearance="outline" >
+                        <mat-label style="font-size:18px">Rol:</mat-label>
+                        <mat-select placeholder="Perfil" [(value)]="idRolCombo" formControlName='idRol'>
+                            <mat-option *ngFor="let v of rolCombo" [value]="v.nidrol">
+                              {{v.snombrerol}}
+                            </mat-option>
+                          </mat-select>
+                          <div  *ngIf="!_validator.isValid('idRol', formOperador)">
+                            <span style="color: #f4516c;">
+                                {{ _validator.errorMessage }}
+                            </span>
+                        </div>  
+                    </mat-form-field>
 
                     <mat-form-field appearance="outline" >
                         <mat-label style="font-size:18px">Area:</mat-label>
@@ -161,6 +220,11 @@
                               {{v.snombre}}
                             </mat-option>
                           </mat-select>
+                          <div  *ngIf="!_validator.isValid('idare', formOperador)">
+                            <span style="color: #f4516c;">
+                                {{ _validator.errorMessage }}
+                            </span>
+                        </div>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" >
@@ -170,16 +234,14 @@
                               {{v.snombreperfil}}
                             </mat-option>
                           </mat-select>
+                          <div  *ngIf="!_validator.isValid('idperfil', formOperador)">
+                            <span style="color: #f4516c;">
+                                {{ _validator.errorMessage }}
+                            </span>
+                        </div>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" >
-                        <mat-label style="font-size:18px">Rol:</mat-label>
-                        <mat-select placeholder="Perfil" [(value)]="idRolCombo" formControlName='idRol'>
-                            <mat-option *ngFor="let v of rolCombo" [value]="v.nidrol">
-                              {{v.snombrerol}}
-                            </mat-option>
-                          </mat-select>
-                    </mat-form-field>
+                   
                 </div> 
                
             </div>
@@ -195,11 +257,11 @@
 
 </mat-dialog-content>
 
-<mat-dialog-actions style="width: 100%;" fxLayoutAlign="center center">
-<button mat-raised-button  type="submit" color="primary"  > <mat-icon>done</mat-icon> {{nombreboton}}</button>
-<button mat-raised-button type="reset"  color="accent" ng-click="cancelar()"><mat-icon>close</mat-icon> Limpiar</button>
-<button mat-raised-button type="submit"  color="accent" ng-click="cancelar()"><mat-icon>close</mat-icon> Cancelar</button>
-</mat-dialog-actions>
+    <mat-dialog-actions style="width: 100%;" fxLayoutAlign="center center">
+    <button mat-raised-button  type="submit" color="primary"  > <mat-icon>done</mat-icon> {{nombreboton}}</button>
+     <button mat-raised-button type="reset"  color="warn" ng-click="cancelar()"><mat-icon>clear_all</mat-icon> Limpiar</button>
+    <button class="btn btn-default" mat-raised-button type="button"  color="accent" (click)="cancelar()"><mat-icon>close</mat-icon> Cancelar</button>
+    </mat-dialog-actions>
 
 </form>
 

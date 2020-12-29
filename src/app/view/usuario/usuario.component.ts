@@ -13,6 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { UsuarioService } from 'src/app/_service/usuario.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -26,7 +27,11 @@ export class UsuarioComponent implements OnInit {
 
   public dataSource: MatTableDataSource<OperadorDto>;
  
+  public mymodel :string;
  
+  formBuscar : FormGroup;
+
+  
   displayedColumns: string[] = ['nidoperador',  'snumdocu', 'snombre',  'slogin','spassword', 'estado', 'acciones'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -35,11 +40,16 @@ export class UsuarioComponent implements OnInit {
     public usuarioService: UsuarioService,
     public operadorServicio: OperadorService,    
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private formBuilder: FormBuilder,
 
   ) { }
 
   ngOnInit(): void {
+
+    this.formBuscar = this.formBuilder.group({
+      palabraclave:  new FormControl('')  
+    });
 
     /*traduce componetes de la tabla*/
     this.paginator._intl.itemsPerPageLabel= 'Operador por Página';
@@ -137,6 +147,13 @@ export class UsuarioComponent implements OnInit {
   }
 
 
+  buscar(){
+
+    console.log(this.formBuscar.value['palabraclave']);
+
+     //this.formBuscar.value['nidoperador'];
+  }
+
   mostrarMas(e?: any) {
 
     this.operadorServicio.listarPageableOpe(e.pageIndex, e.pageSize).subscribe(RespuestaBase => {
@@ -161,5 +178,7 @@ export class UsuarioComponent implements OnInit {
     });
  
   }
+
+ 
 
 }
