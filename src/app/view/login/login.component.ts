@@ -1,7 +1,10 @@
+
+import { SesionService } from './../../_service/sesion.service';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/_service/login.service';
 import { MenuService } from 'src/app/_service/menu.service';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/_service/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +14,20 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
 
-  usaurio : string ;
+  v_usaurio : string ;
 
-    constructor( private loginService: LoginService,
+  usuario: string;
+  clave: string;
+
+
+  
+    constructor( 
+    private loginService: LoginService,
     private menuService: MenuService,
-    private router: Router,) { }
+    private router: Router,
+    private usuarioServiec : UsuarioService,
+    private sesionService : SesionService
+    ) { }
 
 
   ngOnInit(): void {
@@ -27,19 +39,36 @@ export class LoginComponent implements OnInit {
 
     sessionStorage.setItem("login","logeado");
 
-    console.log(sessionStorage.getItem("PRECIO_ENTRADA"));
+    console.log(this.usuario +' '+ this.clave );
 
-    this.usaurio='MAX'; 
+    this.v_usaurio='MAX'; 
  
-         this.menuService.listarPorUsuario(this.usaurio).subscribe(data => {
-           
-           this.menuService.menuCambio.next(data);
- 
-           this.router.navigate(['home']);
+    /*LISTAR MENU DEL USUARIO*/   
+      this.menuService.listarPorUsuario(this.v_usaurio).subscribe(respuestabase => {        
+        this.menuService.menuCambio.next(respuestabase.data);
+        this.router.navigate(['home']);
          });
-       
+
+     /*CARGAR DATOS DEL USAURIO */
+     this.usuarioServiec.consutlarusuariosesion('MAX').subscribe(respuestabase =>{
+      console.log('consulta persona'+respuestabase.data[0].scorreo);
+          this.usuarioServiec.usuariosesion.next(respuestabase.data[0]);
+     });
+
+
+    /*INICIAR  SESION*/         
+    this.sesionService.inicarSesion(this.v_usaurio).subscribe( respuestabase  =>{
+      this.usuarioServiec.usuarioIdsesion.next(respuestabase.mensaje.toString());
+      sessionStorage.setItem("idsesion",respuestabase.mensaje.toString());
+      console.log('incia sesion->'+ respuestabase.mensaje.toString());  
+    }
+    ) ;
  
+
+
    }
+
+
 
 
 }

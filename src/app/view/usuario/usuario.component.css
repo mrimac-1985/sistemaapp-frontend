@@ -1,0 +1,108 @@
+#main-container{
+	margin: 1% auto;
+	width: 97%;
+	background: white;
+}
+
+.spacer {
+	flex: 1 1 auto;
+  }
+
+ 
+  .columnstyle {
+	background-color: cornflowerblue; 
+	text-align:center; 
+	color: rgb(255, 255, 255);
+  }
+
+
+  .container-2{
+	width: 300px;
+	vertical-align: middle;
+	white-space: nowrap;
+	position: relative;
+  }
+
+  .rowStilo{
+	font-weight: normal;
+	cursor: pointer;
+	
+	/*background:linear-gradient(360deg, rgba(242,249,255,1) 0.00%, rgba(255,255,255,1) 52.59%, rgba(242,249,255,1) 99.76% );*/
+  }
+
+  .headStilo{
+	font-size:15px;
+	background: rgb(207,235,255);
+	color: black;
+	background: linear-gradient(0deg, rgba(207,235,255,1) 55%, rgba(178,214,255,1) 87%);
+  }
+
+  .mat-column-name{
+    flex: 0 0 10%;
+}
+
+	.mat-row:hover {
+	background:linear-gradient(360deg, rgba(242,249,255,1) 0.00%, rgba(255,255,255,1) 52.59%, rgba(242,249,255,1) 99.76% );
+  	}
+
+	.headStiloAccion{
+	background: rgb(207,235,255);
+	justify-content: center;
+	color: black;
+	font-size:15px;
+	background: linear-gradient(0deg, rgba(207,235,255,1) 55%, rgba(178,214,255,1) 87%);
+  }
+
+  .rowStiloAccion{
+	background:linear-gradient(360deg, rgba(242,249,255,1) 0.00%, rgba(255,255,255,1) 52.59%, rgba(242,249,255,1) 99.76% );
+	color: black;
+	justify-content: center;
+  }
+
+  .divclasstable{
+	border-radius: 15px 15px 15px 15px;
+	-moz-border-radius: 15px 15px 15px 15px;
+	-webkit-border-radius: 15px 15px 15px 15px;
+	border: 2px ridge #fcfcfc;
+	overflow: hidden;
+	color:rgb(0, 0, 0);
+}
+
+
+.divclassmenu{
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	border: 2px ridge #d6d6d6;
+}
+
+
+.blue-snackbar {
+	background: #2196F3;
+  }
+
+  .red-snackbar{
+	background-color: rgb(153, 50, 50);
+	color:lightgoldenrodyellow;
+  }
+
+ 
+
+  .my-snack-bar {
+    background-color: #E8EAF6;
+    color: red;
+}
+.button-bar {
+    background-color: pink;
+    color: blue;
+}
+
+
+
+  .Desctivado{
+	  color: red;
+  }
+
+  .Activado{
+	color:#4a964a;
+}

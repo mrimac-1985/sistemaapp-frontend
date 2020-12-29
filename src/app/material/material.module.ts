@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatPaginatorModule, MAT_PAGINATOR_DEFAULT_OPTIONS, MAT_PAGINATOR_INTL_PROVIDER } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -27,6 +27,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [],
@@ -60,10 +61,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatTabsModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatRadioModule
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    { provide: MAT_PAGINATOR_DEFAULT_OPTIONS, useValue: 'es-ES' },
+    { provide: MAT_PAGINATOR_INTL_PROVIDER, useValue: 'es-ES' },
   ]
 })
 export class MaterialModule { }

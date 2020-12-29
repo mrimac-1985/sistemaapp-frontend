@@ -1,0 +1,105 @@
+<div id="main-container" >
+
+    <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;" style="margin-top: 10px;">
+
+        <div class="divclassmenu"  >
+            <div style="margin-top: 10px;" class="tp-container" xFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" >
+                <h2 class="app-name">  <mat-icon>settings</mat-icon> Configuración / <mat-icon>people</mat-icon> Usuarios </h2>
+                <span class="spacer"></span>
+                <button mat-button fxShow.lt-md="false" fxShow.gt-sm="true" matTooltip="Reporte Html" (click)="genereReporte('html')">
+                    <img src="../../../assets/iconos/icono_html.png"   height="35px" alt="x" />
+                </button>
+                <button mat-button fxShow.lt-md="false" fxShow.gt-sm="true" matTooltip="Reporte Excel" (click)="genereReporte('xlsx')">
+                    <img src="../../../assets/iconos/icono_excel.png"   height="35px" alt="x" />
+                </button>
+                <button mat-button fxShow.lt-md="false" fxShow.gt-sm="true"   matTooltip="Reporte PDF" (click)="genereReporte('pdf')">
+                    <img src="../../../assets/iconos/icono_pdf.png" height="35px" alt="x" />
+                </button>
+            </div>
+        </div>
+         
+        <div style="margin-top: 20px; ">
+            <div class="tp-container" fxFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" >
+                
+                <!-- <h2 class="app-name" style="width: 100%;" >Lista de Usuarios:</h2> -->
+    
+                <mat-form-field class="example-full-width" appearance="outline" style="width: 100%; margin-right: 10px;">
+                    <mat-label>Buscar Usuario</mat-label>
+                    <input class="toolbar-search" type="text" matInput >
+                    <mat-placeholder>Search</mat-placeholder>
+                    <mat-icon matSuffix style="font-size: 2.0em">search</mat-icon>
+                </mat-form-field>
+    
+                <mat-dialog-actions style="width: 100%;" fxLayoutAlign="center center">
+                    <button mat-raised-button color="primary" (click)="openDialog()">  Nuevo   </button>
+                    <button mat-raised-button color="primary" (click)="openDialog()">  Filtros  </button> 
+                    <button mat-raised-button color="primary" (click)="openDialog()">  Reportes  </button> 
+                </mat-dialog-actions>
+                
+            </div>
+    
+            <div  class="divclasstable" >
+                <mat-table [dataSource]="dataSource" matSort >
+                                      
+                    <ng-container matColumnDef="nidoperador" >
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo" > Id Usuario</mat-header-cell>
+                        <mat-cell fxFlex="10%"  *matCellDef="let row" class="rowStilo"> {{row.operador.nidoperador}}</mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="snumdocu">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Número. Doc. <a href=""></a> </mat-header-cell>
+                        <mat-cell *matCellDef="let row" class="rowStilo"> {{row.operador.snumdocu}}</mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="snombre">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Nombres </mat-header-cell>
+                        <mat-cell *matCellDef="let row" class="rowStilo"> {{row.operador.snombre}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="slogin">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Login </mat-header-cell>
+                        <mat-cell *matCellDef="let row" class="rowStilo"> {{row.operador.usuario.slogin}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="spassword">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Contraseña </mat-header-cell>
+                        <mat-cell *matCellDef="let row" class="rowStilo"> {{row.operador.usuario.spassword}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="estado">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Estado </mat-header-cell>
+                        <mat-cell   *matCellDef="let row" class="rowStilo" [ngClass]="row.estado == 'DESACTIVADO' ? 'Desctivado' : 'Activado'" > {{row.operador.estado}}</mat-cell>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="acciones" >
+                        <mat-header-cell fxFlex="10%" *matHeaderCellDef mat-sort-header class="headStiloAccion" >Acciones</mat-header-cell>
+                        <mat-cell  fxFlex="10%" *matCellDef="let row;"  class="rowStiloAccion" >
+                            <button mat-icon-button color="primary" (click)="openDialog(row)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button color="warn" (click)="elimiarUsuarioDialog(row)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-cell>
+                   </ng-container>
+                   
+                
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                 
+                <mat-paginator   [pageSize]="10"   [pageSizeOptions]="[5, 10, 25, 100]"  showFirstLastButtons  [length]="cantidad" (page)="mostrarMas($event)" class="headStilo" >
+                </mat-paginator>
+              
+ 
+            </div>
+ 
+    
+        </div>
+    
+    </div>
+    <div>
+    </div>
+    
+
+       
+</div>

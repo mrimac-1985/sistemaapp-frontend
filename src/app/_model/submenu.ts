@@ -1,6 +1,6 @@
 export class SubMenu {
-    nIdSubMenu: number;
-    sNombreMenu: string;
-    sIconoMenu: string;
-    sUrl: string;    
+    nidsubmenu: number;
+    snombremenu: string;
+    siconomenu: string;
+    surl: string;    
 }

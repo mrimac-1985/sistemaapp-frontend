@@ -1,3 +1,4 @@
+import { SesionService } from './sesion.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -7,7 +8,8 @@ import { Router } from '@angular/router';
 export class LoginService {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private sesionService: SesionService
   ) { }
 
 
@@ -17,10 +19,14 @@ export class LoginService {
   }
 
 
-  cerrarSesion() {
-  
-      sessionStorage.clear();
-      this.router.navigate(['login']);
+  cerrarSesion(nidSesion : number) {
+      
+    this.sesionService.cerrarSesion(nidSesion);
+
+    sessionStorage.clear();
+    this.router.navigate(['login']);
+
+    
   
   }
 

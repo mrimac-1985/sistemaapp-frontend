@@ -1,9 +1,9 @@
 export class Configuracion {
 
-    HOST: string;
-    PRECIO_ENTRADA :string;
-    TOKEN_NAME : string;
-    TOKEN_AUTH_USERNAME : string;
-    TOKEN_AUTH_PASSWORD : string;
+    host: string;
+    precio_entrada :string;
+    token_name : string;
+    token_auth_username : string;
+    token_auth_password : string;
 
 }

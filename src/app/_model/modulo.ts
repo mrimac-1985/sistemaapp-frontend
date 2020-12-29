@@ -1,11 +1,11 @@
 export class Modulo{
 
-    nIdModulo : number;
-    snombreModulo: string;
-    sSiglas: string;
-    sObservacion: string;
-    bActivo: boolean;
-    dFechaReg: Date;
-    nIdSesion: number;
+    nidmodulo : number;
+    snombremodulo: string;
+    ssiglas: string;
+    sobservacion: string;
+    bactivo: boolean;
+    dfechareg: Date;
+    nidsesion: number;
     
 }

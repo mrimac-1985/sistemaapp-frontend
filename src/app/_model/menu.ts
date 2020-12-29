@@ -2,15 +2,15 @@ import { SubMenu } from './submenu';
 import { Modulo } from './modulo';
 
 export class Menu {
-    nIdMenu: number;
-    sNombreMenu: string;
-    sIconoMenu: string;
-    sUrl: string;
-    bActivo: boolean;
+    nidmenu: number;
+    snombremenu: string;
+    siconomenu: string;
+    surl: string;
+    bactivo: boolean;
     modulo: Modulo;
-    dFechaReg: Date;
-    nIdSesion: number;        
-    subMenu: SubMenu[];
+    dfechareg: Date;
+    nidsesion: number;        
+    submenu: SubMenu[];
 
 }
 
