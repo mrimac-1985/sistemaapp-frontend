@@ -108,11 +108,20 @@
 }
 
 
+.my-snack-bar {
+    background-color: #E8EAF6;
+    color: red;
+}
+.button-bar {
+    background-color: pink;
+    color: blue;
+}
 
 
 
+/*INCIIO -> ESTILO PARA EL BUSCADOR -----------------------------------------------------------------*/
 #search-box {
-	height: 43px;
+	height: 45px;
 	width: 100%;
 	 }
   
@@ -167,3 +176,11 @@
 	#search-box #search-button:hover {
 	  border: 1px solid #47b98f;
 	  background-color: #47b98f; } }
+
+
+/*FIN ESTILO PARA EL BUSCADO-------------------------------------------------------*/
+
+
+
+
+	  

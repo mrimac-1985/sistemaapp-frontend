@@ -1,3 +1,5 @@
+import { ReporteService } from './../../util/reporte.service';
+import { NotificacionService } from './../../util/notificacion.service';
 import { EliminarDialogComponent } from './eliminar-dialog/eliminar-dialog.component';
 import { UsuarioDialogComponent } from './usuario-dialog/usuario-dialog.component';
 import { OperadorDto } from './../../_model_dto/operadorDto';
@@ -14,6 +16,7 @@ import { UsuarioService } from 'src/app/_service/usuario.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Pageable } from 'src/app/_model/pageable';
 
 
 @Component({
@@ -31,6 +34,8 @@ export class UsuarioComponent implements OnInit {
  
   formBuscar : FormGroup;
 
+
+  pagina: Pageable;
   
   displayedColumns: string[] = ['nidoperador',  'snumdocu', 'snombre',  'slogin','spassword', 'estado', 'acciones'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -42,6 +47,8 @@ export class UsuarioComponent implements OnInit {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
+    private notificacion : NotificacionService,
+    private ReporteService : ReporteService
 
   ) { }
 
@@ -64,8 +71,14 @@ export class UsuarioComponent implements OnInit {
   }
 
   listarOperadores(page: number , side: number) {
+  
+      /*crea el objeto pagina*/
+      this.pagina = new Pageable();
+      this.pagina.pageNumber =page*side;
+      this.pagina.pageSize =side;
 
-      this.operadorServicio.listarPageableOpe(page, side).subscribe(respuestabase => {
+      
+      this.operadorServicio.listarPageableOpe(this.pagina).subscribe(respuestabase => {
       this.cantidad = respuestabase.data[0].totalElements;      
       this.dataSource = new MatTableDataSource(respuestabase.data[0].content);      
       this.dataSource.paginator = this.paginator;
@@ -78,14 +91,12 @@ export class UsuarioComponent implements OnInit {
   
     /*MUESTRA MENSAJE*/
     this.operadorServicio.mensajeCambio.subscribe(data => {
-      this.snackBar.open(data, 'OK', {
-        duration: 4000  ,
-        verticalPosition: 'bottom', // 'top' | 'bottom'
-        horizontalPosition: 'end', //'start' | 'center' | 'end' | 'left' | 'right'
-        panelClass: ['my-snack-bar', 'button-bar']
-      });
-      
-    }); 
+
+      this.notificacion.mostrarNtificacion(data,'OK','exito');
+    }),(error : any) =>{
+
+      this.notificacion.mostrarNtificacion(error,'OK','error');
+    }; 
 
   }
 
@@ -103,6 +114,7 @@ export class UsuarioComponent implements OnInit {
     .afterClosed().subscribe( resultado => {
       console.log('resultado ->'+resultado);
       this.refrescarTabla();
+      this.formBuscar.reset();
       if (resultado === 1) {
         console.log(resultado);
         // After dialog is closed we're doing frontend updates
@@ -117,9 +129,9 @@ export class UsuarioComponent implements OnInit {
 
 
   
-  elimiarUsuarioDialog(operador?: Operador) {
+  elimiarUsuarioDialog(operador?: OperadorDto) {
 
-    let ope = operador != null ? operador : new Operador();
+    let ope = operador != null ? operador : new OperadorDto();
     this.dialog.open(EliminarDialogComponent, {
       width: '350px',
       data: ope
@@ -132,31 +144,52 @@ export class UsuarioComponent implements OnInit {
  
   }
 
+  activarUsuarioDialog(operador?: OperadorDto) {
+     
+  }
 
   refrescarTabla(){
     
     this.paginator._changePageSize(this.paginator.pageSize);
   }
-
-  eliminar(usuario?: Usuario) {
-     
-  }
+ 
 
   filter(x: string) {
     this.dataSource.filter = x.trim().toLowerCase();
   }
 
 
+
+
+
   buscar(){
 
+    /*crea el objeto pagina*/
+    this.pagina = new Pageable();
+    this.pagina.pageNumber =0;
+    this.pagina.pageSize =10;
+    this.pagina.palabraClave= this.formBuscar.value['palabraclave'];
     console.log(this.formBuscar.value['palabraclave']);
+
+    this.operadorServicio.listarPageableOpe(this.pagina).subscribe(respuestabase => {
+      this.cantidad = respuestabase.data[0].totalElements;      
+      this.dataSource = new MatTableDataSource(respuestabase.data[0].content);      
+      //this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
+    });
 
      //this.formBuscar.value['nidoperador'];
   }
 
   mostrarMas(e?: any) {
 
-    this.operadorServicio.listarPageableOpe(e.pageIndex, e.pageSize).subscribe(RespuestaBase => {
+    /*crea el objeto pagina*/
+    this.pagina = new Pageable();
+    this.pagina.pageNumber =e.pageIndex*e.pageSize;
+    this.pagina.pageSize =e.pageSize;
+          
+    this.operadorServicio.listarPageableOpe(this.pagina).subscribe(RespuestaBase => {
       this.cantidad = RespuestaBase.data[0].totalElements;
       this.dataSource = new MatTableDataSource( RespuestaBase.data[0].content);
       //para recargar la tabla no se debe ejecutar el paginator
@@ -167,16 +200,9 @@ export class UsuarioComponent implements OnInit {
   }
 
   genereReporte(tiporeporte: string){
-
-    this.usuarioService.generarExcel(tiporeporte).subscribe(data => {
-      const url = window.URL.createObjectURL(data);
-      const a = document.createElement('a');
-      a.setAttribute('style', 'display:none;')
-      a.href = url;
-      a.download =  'reporte.'+tiporeporte;
-      a.click();
+    this.operadorServicio.generarReporte(tiporeporte).subscribe(RespuestaBase => {
+      this.ReporteService.generareporte(RespuestaBase.data[0].reporte,'ReporteOperador',tiporeporte);     
     });
- 
   }
 
  

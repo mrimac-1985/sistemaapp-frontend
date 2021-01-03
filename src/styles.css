@@ -2,3 +2,24 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/*ESTILO PARA EL SNACKBAR*/
+.error.mat-snack-bar-container{
+    background: #cc0000;
+    color: white;
+}
+
+.exito.mat-snack-bar-container{
+    background: #0aa00a;
+    color: white;
+}
+
+
+.alerta.mat-snack-bar-container{
+    background: #eccc14;
+    color: white;
+}
+
+/*ESTILO PARA EL SNACKBAR*/
+

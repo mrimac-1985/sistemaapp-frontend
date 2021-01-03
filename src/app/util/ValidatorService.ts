@@ -12,34 +12,36 @@ export class ValidatorService {
      */
  
 
-    public isValid(_field: string , _form: FormGroup): boolean {
+    public isValid(_field: string , _form: FormGroup): string {
           
  
+        this.errorMessage = "";
+        
             if (_form.get(_field)?.invalid && _form.get(_field)?.touched) {
                 if (_form.get(_field)?.errors?.required) {
                     this.errorMessage = "Campo es requerido";
-                    return false;
+                    //return false;
                 }
 
                 if (_form.get(_field)?.errors?.minlength) {
                     this.errorMessage = "Mínimo " + _form.get(_field)?.errors?.minlength.requiredLength + " caracteres";
-                    return false;
+                    //return false;
                 }
 
                 if (_form.get(_field)?.errors?.maxlength) {
                     this.errorMessage = "Máximo " + _form.get(_field)?.errors?.maxlength.requiredLength + " caracteres";
-                    return false;
+                    //return false;
                 }
 
                 if (_form.get(_field)?.hasError('pattern')) {
                     this.errorMessage = "Campo no valido";
-                    return false;
+                    //return false;
                 }
  
 
             }
        
        
-        return true;
+        return this.errorMessage;
     }
 }

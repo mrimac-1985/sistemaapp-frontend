@@ -29,6 +29,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgProgressHttpModule } from "ngx-progressbar/http";
 import { ValidatorService } from './util/ValidatorService';
+import { NotificacionComponent } from './util/notificacion/notificacion.component';
+import { ReporteService } from './util/reporte.service';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import { ValidatorService } from './util/ValidatorService';
     EliminarDialogComponent,
     UsuarioDialogComponent,
     DialogCerrarsesionComponent,
-    DashboardComponent
+    DashboardComponent,
+    NotificacionComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +71,7 @@ import { ValidatorService } from './util/ValidatorService';
     }),
     NgProgressHttpModule
   ],
-  providers: [ValidatorService],
+  providers: [ValidatorService, ReporteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

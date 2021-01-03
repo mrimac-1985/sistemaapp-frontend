@@ -1,17 +1,20 @@
 
 import { SesionService } from './../../_service/sesion.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginService } from 'src/app/_service/login.service';
 import { MenuService } from 'src/app/_service/menu.service';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/_service/usuario.service';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ValidatorService } from 'src/app/util/ValidatorService';
+import { NotificacionService } from 'src/app/util/notificacion.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit , OnDestroy{
 
 
   v_usaurio : string ;
@@ -19,6 +22,7 @@ export class LoginComponent implements OnInit {
   usuario: string;
   clave: string;
 
+  formUsuario: FormGroup;
 
   
     constructor( 
@@ -26,44 +30,80 @@ export class LoginComponent implements OnInit {
     private menuService: MenuService,
     private router: Router,
     private usuarioServiec : UsuarioService,
-    private sesionService : SesionService
-    ) { }
+    private sesionService : SesionService,
+    private formBuilder : FormBuilder,
+    public _validator: ValidatorService,
+    private notificacion : NotificacionService
+    ) {       
+    }
+  
+    ngOnDestroy(): void {
+    
+      //sessionStorage.clear();
+  }
 
 
   ngOnInit(): void {
+
+  
+    this.formUsuario = this.formBuilder.group({
+      usuario:  new FormControl('', [Validators.required] ) , 
+      contraseña:  new FormControl('') 
+    });
   }
 
 
   iniciarSesion() {
  
 
-    sessionStorage.setItem("login","logeado");
+  if(this.formUsuario.valid){
 
-    console.log(this.usuario +' '+ this.clave );
-
-    this.v_usaurio='MAX'; 
+    
  
-    /*LISTAR MENU DEL USUARIO*/   
-      this.menuService.listarPorUsuario(this.v_usaurio).subscribe(respuestabase => {        
-        this.menuService.menuCambio.next(respuestabase.data);
-        this.router.navigate(['home']);
-         });
+  
+      this.v_usaurio=this.formUsuario.value['usuario'];; 
+  
+      /*LISTAR MENU DEL USUARIO*/   
+        this.menuService.listarPorUsuario(this.v_usaurio).subscribe(respuestabase => {
 
-     /*CARGAR DATOS DEL USAURIO */
-     this.usuarioServiec.consutlarusuariosesion('MAX').subscribe(respuestabase =>{
-      console.log('consulta persona'+respuestabase.data[0].scorreo);
-          this.usuarioServiec.usuariosesion.next(respuestabase.data[0]);
-     });
+          console.log(respuestabase.data);
+          
+          if(respuestabase.data[0]!== undefined){
+
+            sessionStorage.setItem("login","logeado");
+
+                this.menuService.menuCambio.next(respuestabase.data);
+                this.router.navigate(['home']);
+
+              /*CARGAR DATOS DEL USAURIO */
+              this.usuarioServiec.consutlarusuariosesion(this.v_usaurio).subscribe(respuestabase =>{
+                console.log('consulta persona'+respuestabase.data[0].scorreo);
+                    this.usuarioServiec.usuariosesion.next(respuestabase.data[0]);
+              });
 
 
-    /*INICIAR  SESION*/         
-    this.sesionService.inicarSesion(this.v_usaurio).subscribe( respuestabase  =>{
-      this.usuarioServiec.usuarioIdsesion.next(respuestabase.mensaje.toString());
-      sessionStorage.setItem("idsesion",respuestabase.mensaje.toString());
-      console.log('incia sesion->'+ respuestabase.mensaje.toString());  
-    }
-    ) ;
- 
+              /*INICIAR  SESION*/         
+              this.sesionService.inicarSesion(this.v_usaurio).subscribe( respuestabase  =>{
+                this.usuarioServiec.usuarioIdsesion.next(respuestabase.mensaje.toString());
+                sessionStorage.setItem("idsesion",respuestabase.mensaje.toString());
+                console.log('incia sesion->'+ respuestabase.mensaje.toString());  
+              }
+              ) ;
+          }else{
+
+            this.notificacion.mostrarNtificacion('Usuario no valido!!!','OK','error');
+
+          }              
+
+
+        });
+
+    
+  
+
+  }
+
+
 
 
    }

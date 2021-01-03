@@ -64,3 +64,16 @@ mat-grid-tile {
 
  
       
+/*INCIO MENSJE ERROR*/
+
+
+input.error, input select.error {
+   border: 1px solid red;
+}
+
+label.error{
+   color:red;
+}
+ 
+
+

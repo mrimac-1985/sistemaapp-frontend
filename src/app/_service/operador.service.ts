@@ -12,6 +12,7 @@ import { Pageable } from '../_model/pageable';
 export class OperadorService {
 
 
+
   operadorCambio = new Subject<Operador[]>();
   mensajeCambio = new Subject<string>();
   listaCambio = new Subject<Operador[]>();
@@ -45,15 +46,23 @@ export class OperadorService {
   }
 
 
-  listarPageableOpe(p: number, s: number) {
-    this.pagina.pageNumber = p *s ;
-    this.pagina.pageSize = s;
-    return this.http.post<any>(this.url+'/listaroperador', this.pagina);
+  listarPageableOpe(pagiable: Pageable) {    
+    return this.http.post<any>(this.url+'/listaroperador', pagiable);
   }
 
 
   modificarOperador(operadorDto: OperadorDto) {
     return this.http.post<any>(this.url+'/modificarUsuarioOperador', operadorDto);
+  }
+  
+  generarExcel(tiporeporte : string) {
+    return this.http.post(`${this.url}/generarReporte`,tiporeporte, {
+      responseType: 'blob'
+    });
+    
+  }
+  generarReporte(tiporeporte: string) {
+    return this.http.post<any>(this.url+'/generarReporte',tiporeporte);
   }
 
 }

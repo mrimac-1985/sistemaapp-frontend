@@ -61,8 +61,10 @@ export class AppComponent implements OnInit {
     private dialog: MatDialog,
     public loginService: LoginService,
     private sanitization: DomSanitizer
+  ) {  
 
-  ) {  }
+    
+  }
   
 
 
@@ -73,6 +75,9 @@ export class AppComponent implements OnInit {
     // this.cargarVariablesReactivas();
 
 
+    this.usuariosesion = new UsuarioSesion();
+ 
+
     /*CARGA MENU*/
     this.menuService.menuCambio.subscribe(respuesta => {  
       this.menus = respuesta;         
@@ -80,8 +85,15 @@ export class AppComponent implements OnInit {
 
     /*CARGAR USUARIO SESION */
     this.usuarioServiec.usuariosesion.subscribe(data=> {
-      this.usuariosesion = data;
-      this.convertir(data.ximagen);
+      this.usuariosesion = data;   
+
+      if(data.ximagen !=null){
+        this.convertir(data.ximagen);
+      }   else {
+        this.imagenusuario = null;
+        this.imagenEstado = false;  
+      }
+      
     }); 
     
     /*CARGAR ID SESION*/
@@ -133,8 +145,10 @@ export class AppComponent implements OnInit {
   }
 
   sanar(base64: any) {
+
     this.imagenusuario = this.sanitization.bypassSecurityTrustResourceUrl(base64);
     this.imagenEstado = true;
+
   }
 
 

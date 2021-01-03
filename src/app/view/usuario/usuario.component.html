@@ -19,29 +19,22 @@
         </div>
          
         <div style="margin-top: 20px; ">
-            <div class="tp-container" fxFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="1px" >
+            <div style="margin-bottom: 15px;" class="tp-container" fxFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="2px" >
                 
-                <!-- <h2 class="app-name" style="width: 100%;" >Lista de Usuarios:</h2> -->
-                <div class="example-full-width" style="width: 50%;" >
-                    <mat-form-field  appearance="outline" style="  margin-right: 10px;">
-                        <mat-label>Buscar por nombre de operador</mat-label>
-                        <input class="toolbar-search" type="text" matInput >                        
-                        <mat-icon matSuffix style="font-size: 2.0em">search</mat-icon>
-                        
-                    </mat-form-field>        
-                    <button style="margin-top: -50px; height: 55px;" mat-raised-button color="primary" (click)="openDialog()"><mat-icon>new_releases</mat-icon>  Nuevo   </button>                                            
-            
-                </div>   
-                
-                <div style="width: 50%;" >
-                    
+                <div class="example-full-width" style="width: 100%;" >                    
                     <form id="search-box"  [formGroup]="formBuscar" (ngSubmit)="buscar()" >
-                        <input id="search-form" type="text" placeholder="Buscar por nombre de Operador"  formControlName="palabraclave"  >
+                        <input id="search-form" type="text" placeholder="Buscar por nombre de Operador / Num. Documento"  formControlName="palabraclave"  >
                         <button id="search-button" type="submit"  ></button>
                     </form>
                                               
                         
                 </div>
+                    <!-- <h2 class="app-name" style="width: 100%;" >Lista de Usuarios:</h2> -->
+                <div class="example-full-width" style="width: 100%;" >
+                         
+                    <button style="height: 45px;" mat-raised-button color="primary" (click)="openDialog()"><mat-icon>person_add</mat-icon>  Nuevo   </button>                                            
+            
+                </div>  
                 
             </div>
     
@@ -80,11 +73,14 @@
                     <ng-container matColumnDef="acciones" >
                         <mat-header-cell fxFlex="10%" *matHeaderCellDef mat-sort-header class="headStiloAccion" >Acciones</mat-header-cell>
                         <mat-cell  fxFlex="10%" *matCellDef="let row;"  class="rowStiloAccion" >
-                            <button mat-icon-button color="primary" (click)="openDialog(row)">
+                            <button mat-icon-button color="primary" matTooltip="Editar"  (click)="openDialog(row)">
                                 <mat-icon>edit</mat-icon>
                             </button>
-                            <button mat-icon-button color="warn" (click)="elimiarUsuarioDialog(row)">
-                                <mat-icon>delete</mat-icon>
+                            <button mat-icon-button color="warn" matTooltip="Eliminar" (click)="elimiarUsuarioDialog(row)">
+                                <mat-icon>delete_outline</mat-icon>
+                            </button>
+                            <button mat-icon-button color="basic" matTooltip="Activar" (click)="activarUsuarioDialog(row)">
+                                <mat-icon>open_in_browser</mat-icon>
                             </button>
                         </mat-cell>
                    </ng-container>

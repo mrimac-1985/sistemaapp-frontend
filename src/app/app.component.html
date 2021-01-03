@@ -10,9 +10,9 @@
 
 <mat-sidenav  #sidenav   style="width: 230px; background-color: #2A3F54; " mode="side" [opened]="loginService.estaLogueado()" >
   
-  <div style="text-align: center; color: white; " class="fotoclass"  *ngIf="imagenEstado">
-      <img   [src]="imagenusuario" width="100" height="120" style="margin-left: 10px; margin-top: 15px;" class="circular--square"  />
-      <h4>{{usuariosesion.snombre}}</h4>
+  <div style="text-align: center; color: white; " class="fotoclass"  >    
+      <img     [src]="imagenusuario || '../../../assets/iconos/userless.png'" width="80" height="100" style="margin-left: 10px; margin-top: 15px;" class="circular--square"  />
+      <h4>{{usuariosesion.snombre}} </h4>
       <h5 style="margin-top: -10px;" >{{usuariosesion.snombrerol}}</h5>
       <h5 style="margin-top: -10px;" >{{usuariosesion.scorreo}}</h5>        
       <mat-divider style="background-color: rgb(153, 153, 153);"></mat-divider>
@@ -73,7 +73,7 @@
               <mat-icon *ngIf="sidenav.opened"  matTooltip="Minimizar Menú">menu_open</mat-icon>
           </button>
 
-          <h1 class="app-name">SISTEMA DE VENTAS</h1>
+          <h1 class="app-name">SISTEMA DE VENTAS </h1>
 
           <button mat-button fxShow.lt-md="false" fxShow.gt-sm="true" routerLink="/home/presentacion">
               <mat-icon>home</mat-icon>
