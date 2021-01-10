@@ -1,3 +1,4 @@
+import { Pageable } from './../_model/pageable'
 import { HttpClient } from '@angular/common/http'
 import { Rol } from './../_model/rol'
 import { Injectable } from '@angular/core';
@@ -37,8 +38,8 @@ export class RolService {
     return this.http.delete(`${this.url}/${id}`);
   }
 
-  listarPageable(p: number, s: number) {
-    return this.http.get<any>(`${this.url}/pageable?page=${p}&size=${s}`); //&sort=nombre
+  listarPageable(pageable : Pageable) {
+    return this.http.post<any>(this.url+'/listarRolPage', pageable); //&sort=nombre
   }
   
   listarRolUsuario(nidusuario: number) {

@@ -1,3 +1,4 @@
+import { RolComponent } from './view/rol/rol.component'
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AreaComponent } from './view/area/area.component';
@@ -12,6 +13,7 @@ import { UsuarioComponent } from './view/usuario/usuario.component';
 
 const routes: Routes = [
   { path: 'reporte', component: DashboardComponent },  
+  { path: 'roles', component: RolComponent },  
   { path: 'usuario', component: UsuarioComponent },
   { path: 'sede', component: SedeComponent},
   { path: 'area', component: AreaComponent},

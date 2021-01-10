@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit , OnDestroy{
 
   
     this.formUsuario = this.formBuilder.group({
-      usuario:  new FormControl('', [Validators.required] ) , 
+      usuario:  new FormControl('MAX', [Validators.required] ) , 
       contraseña:  new FormControl('') 
     });
   }

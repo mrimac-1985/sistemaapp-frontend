@@ -31,9 +31,21 @@ import { NgProgressHttpModule } from "ngx-progressbar/http";
 import { ValidatorService } from './util/ValidatorService';
 import { NotificacionComponent } from './util/notificacion/notificacion.component';
 import { ReporteService } from './util/reporte.service';
+<<<<<<< HEAD
 import { ImagenService } from './util/imagen.service';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from './util/format-datepicker';
+=======
+import { RolDialogComponent } from './view/rol/rol-dialog/rol-dialog.component';
+import { EliminarRolDialogComponent } from './view/rol/eliminar-rol-dialog/eliminar-rol-dialog.component';
+import { SedeDialogComponent } from './view/sede/sede-dialog/sede-dialog.component';
+import { EliminarSedeDialogComponent } from './view/sede/eliminar-sede-dialog/eliminar-sede-dialog.component';
+import { PerfilDialogComponent } from './view/perfil/perfil-dialog/perfil-dialog.component';
+import { EliminarPerfilDialogComponent } from './view/perfil/eliminar-perfil-dialog/eliminar-perfil-dialog.component';
+import { AreaDialogComponent } from './view/area/area-dialog/area-dialog.component';
+import { EliminarAreaDialogComponent } from './view/area/eliminar-area-dialog/eliminar-area-dialog.component';
+
+>>>>>>> b83bebd8b6b29c3902deb365f560b14986b09ce4
 
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
@@ -59,7 +71,15 @@ registerLocaleData(localeEs, 'es');
     UsuarioDialogComponent,
     DialogCerrarsesionComponent,
     DashboardComponent,
-    NotificacionComponent
+    NotificacionComponent,
+    RolDialogComponent,
+    EliminarRolDialogComponent,
+    SedeDialogComponent,
+    EliminarSedeDialogComponent,
+    PerfilDialogComponent,
+    EliminarPerfilDialogComponent,
+    AreaDialogComponent,
+    EliminarAreaDialogComponent
   ],
   imports: [
     BrowserModule,

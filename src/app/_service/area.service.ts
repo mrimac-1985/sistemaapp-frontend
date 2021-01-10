@@ -3,6 +3,7 @@ import { Area } from './../_model/area'
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Pageable } from '../_model/pageable';
 
 @Injectable({
   providedIn: 'root'
@@ -37,9 +38,12 @@ export class AreaService {
     return this.http.delete(`${this.url}/${id}`);
   }
 
-  listarPageable(p: number, s: number) {
-    return this.http.get<any>(`${this.url}/pageable?page=${p}&size=${s}`);
+  listarPageable(pageable : Pageable) {
+    return this.http.post<any>(this.url+'/listarAreaPage', pageable); //&sort=nombre
   }
+  /*listarPageable(p: number, s: number) {
+    return this.http.get<any>(`${this.url}/pageable?page=${p}&size=${s}`);
+  }*/
 
   generarExcel(tiporeporte : string) {
     return this.http.post(`${this.url}/generarReporte`,tiporeporte, {

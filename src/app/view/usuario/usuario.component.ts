@@ -103,9 +103,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   openDialog(operador?: OperadorDto) {
-
-  
-    
+ 
     let ope = operador != null ? operador : new OperadorDto();
   
 
