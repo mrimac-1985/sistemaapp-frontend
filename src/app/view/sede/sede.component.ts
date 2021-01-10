@@ -16,15 +16,6 @@ import { EliminarSedeDialogComponent } from './eliminar-sede-dialog/eliminar-sed
 })
 export class SedeComponent implements OnInit {
 
-<<<<<<< HEAD
-
-  variablebooleana: boolean= false;
-   miarray = [1,2,3,4,5,6,7,8,9];
-   canasto = ["Manzanas", "Peras", "Platanos", "Frutillas"]
-   estado = 1;
-   
-  constructor() { }
-=======
   public dataSource: MatTableDataSource<Sede>;
   public cantidad: number  = 0;
 
@@ -40,7 +31,6 @@ export class SedeComponent implements OnInit {
     private dialog : MatDialog,
     public sedeservicio : SedeService
   ) { }
->>>>>>> b83bebd8b6b29c3902deb365f560b14986b09ce4
 
   ngOnInit(): void {
 
