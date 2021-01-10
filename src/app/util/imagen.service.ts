@@ -1,11 +1,19 @@
+import { Injectable } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-export class ImagenConver {
-  imagenusuario: any;
+@Injectable({
+  providedIn: 'root',
+})
+export class ImagenService {
+  
+  imagenData: any;
 
   constructor(private sanitization: DomSanitizer) {}
 
   convertir(binario: any) {
+    
+    //this.imagenData= null;
+
     let reader = new FileReader();
     reader.readAsDataURL(this.b64toBlob(binario, 'image/png', 512));
     reader.onloadend = () => {
@@ -13,14 +21,14 @@ export class ImagenConver {
       this.sanar(base64);
     };
 
-    return this.imagenusuario;
+    return this.imagenData;
   }
 
+
   sanar(base64: any) {
-    this.imagenusuario = this.sanitization.bypassSecurityTrustResourceUrl(
-      base64
-    );
+    this.imagenData = this.sanitization.bypassSecurityTrustResourceUrl(base64);
   }
+
 
   b64toBlob(b64Data: string, contentType: string, sliceSize: number) {
     contentType = contentType || 'image/png';
@@ -44,17 +52,5 @@ export class ImagenConver {
 
     var blob = new Blob(byteArrays, { type: contentType });
     return blob;
-  }
-
-  dataURLtoBlob(dataURL: string) {
-    // Decode the dataURL
-    var binary = atob(dataURL.split(',')[1]);
-    // Create 8-bit unsigned array
-    var array = [];
-    for (var i = 0; i < binary.length; i++) {
-      array.push(binary.charCodeAt(i));
-    }
-    // Return our Blob object
-    return new Blob([new Uint8Array(array)], { type: 'image/png' });
   }
 }

@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit , OnDestroy{
               ) ;
           }else{
 
-            this.notificacion.mostrarNtificacion('Usuario no valido!!!','OK','error');
+            this.notificacion.mostrarNotificacion('Usuario no valido!!!','OK','error');
 
           }              
 

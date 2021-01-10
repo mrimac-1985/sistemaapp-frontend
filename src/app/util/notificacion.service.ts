@@ -12,7 +12,7 @@ export class NotificacionService {
   constructor(private sackbar: MatSnackBar ) { }
 
 
-  mostrarNtificacion(mensaje: string , buttonTexto :string , tipoMensaje : 'error'|'exito'|'alerta' ){
+  mostrarNotificacion(mensaje: string , buttonTexto :string , tipoMensaje : 'error'|'exito'|'alerta' ){
 
     this.sackbar.openFromComponent(NotificacionComponent, {
       data:{
@@ -20,7 +20,7 @@ export class NotificacionService {
         buttonText:buttonTexto,
         type: tipoMensaje
       },
-      duration : 6000,
+      duration : 5000,
       horizontalPosition:'right',
       verticalPosition:'bottom',
       panelClass: tipoMensaje

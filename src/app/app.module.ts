@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +31,13 @@ import { NgProgressHttpModule } from "ngx-progressbar/http";
 import { ValidatorService } from './util/ValidatorService';
 import { NotificacionComponent } from './util/notificacion/notificacion.component';
 import { ReporteService } from './util/reporte.service';
+import { ImagenService } from './util/imagen.service';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { AppDateAdapter, APP_DATE_FORMATS } from './util/format-datepicker';
 
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs, 'es');
 
 @NgModule({
   declarations: [
@@ -71,7 +77,20 @@ import { ReporteService } from './util/reporte.service';
     }),
     NgProgressHttpModule
   ],
-  providers: [ValidatorService, ReporteService],
+  providers: [ValidatorService, ReporteService , ImagenService,
+    { provide: LOCALE_ID, useValue: 'es' },
+    { provide: MAT_DATE_LOCALE, useValue: 'es' },
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+
+  constructor(){
+
+  }
+
+ }
+

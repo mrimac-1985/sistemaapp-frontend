@@ -14,6 +14,8 @@ import { environment } from 'src/environments/environment';
 import { Configuracion } from './_model/configuracion';
 import { DomSanitizer } from '@angular/platform-browser';
 
+ 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -32,6 +34,7 @@ export class AppComponent implements OnInit {
   collapseHeight: string = "42px";
   displayMode : string = "flat";
 
+  
   /*VARIABLES DEL LOADER */
   startedClass = false;
   completedClass = false;
@@ -102,6 +105,8 @@ export class AppComponent implements OnInit {
     }); 
   
     
+ 
+
   }
   
 
