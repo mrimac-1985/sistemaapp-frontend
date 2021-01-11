@@ -34,13 +34,6 @@ export class UsuarioDialogComponent implements OnInit {
   rolCombo: Rol[];
   tipodocumentocombo: TipoDocumento[];
 
-  /*ID COMBOS*/
-  idarecombo: number;
-  idperfilcombo: number;
-  idRolCombo: number;
-  idcombogenero: string;
-  idTipoDocumento: string;
-
   /**NOMBRE BOTON*/
   nombreboton: string;
 
