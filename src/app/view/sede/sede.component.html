@@ -1,1 +1,61 @@
 <p>sede works!</p>
+
+<div class="example-full-width" style="width: 100%;" >
+                         
+    <button style="height: 45px;" mat-raised-button color="primary" (click)="openDialog()"><mat-icon>person_add</mat-icon>  Nuevo   </button>                                            
+
+</div>  
+
+<div  class="divclasstable" >
+    <mat-table [dataSource]="dataSource" matSort >
+                          
+        <ng-container matColumnDef="nidsede" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo" > Id Sede</mat-header-cell>
+            <mat-cell fxFlex="10%"  *matCellDef="let sede" class="rowStilo"> {{sede.nidsede}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="snombre">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Nombre<a href=""></a> </mat-header-cell>
+            <mat-cell *matCellDef="let sede" class="rowStilo"> {{sede.snombre}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="sdireccion">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Dirección </mat-header-cell>
+            <mat-cell *matCellDef="let sede" class="rowStilo"> {{sede.sdireccion}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="subigeo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Ubigeo </mat-header-cell>
+            <mat-cell *matCellDef="let sede" class="rowStilo"> {{sede.subigeo}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dfechareg">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Fecha Creación </mat-header-cell>
+            <mat-cell *matCellDef="let sede" class="rowStilo"> {{sede.dfechareg}}</mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="acciones" >
+            <mat-header-cell fxFlex="10%" *matHeaderCellDef mat-sort-header class="headStiloAccion" >Acciones</mat-header-cell>
+            <mat-cell  fxFlex="10%" *matCellDef="let row;"  class="rowStiloAccion" >
+                <button mat-icon-button color="primary" matTooltip="Editar"  (click)="openDialog(row)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" matTooltip="Eliminar" (click)="eliminarSedeDialog(row)">
+                    <mat-icon>delete_outline</mat-icon>
+                </button>
+                <button mat-icon-button color="basic" matTooltip="Activar" (click)="activarSedeDialog(row)">
+                    <mat-icon>open_in_browser</mat-icon>
+                </button>
+            </mat-cell>
+       </ng-container>
+       
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+     
+    <mat-paginator   [pageSize]="10"   [pageSizeOptions]="[5, 10, 25, 100]"  showFirstLastButtons  [length]="cantidad" (page)="mostrarMas($event)" class="headStilo" >
+    </mat-paginator>
+  
+
+</div>

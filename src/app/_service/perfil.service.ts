@@ -1,3 +1,4 @@
+import { Pageable } from './../_model/pageable'
 import { Perfil } from './../_model/perfil'
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -38,8 +39,8 @@ export class PerfilService {
     return this.http.delete(`${this.url}/${id}`);
   }
 
-  listarPageable(p: number, s: number) {
-    return this.http.get<any>(`${this.url}/pageable?page=${p}&size=${s}`);
+  listarPageable(pageable : Pageable) {
+    return this.http.post<any>(this.url+'/listarPerfilPage', pageable);
   }
 
   generarExcel(tiporeporte : string) {
