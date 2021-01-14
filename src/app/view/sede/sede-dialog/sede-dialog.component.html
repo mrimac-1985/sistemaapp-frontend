@@ -1,1 +1,78 @@
-<p>sede-dialog works!</p>
+
+<div class="header"    fxFlexOrder="2"  fxLayoutGap="20px" >      
+    Mantenimiento Sede:                                 
+</div>
+
+<mat-divider></mat-divider>
+
+<section  fxLayout="column" fxLayoutAlign="center center">
+
+
+    <mat-dialog-content style="width: 100%;"> 
+
+        <div class="tp-container" fxFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
+
+            <mat-form-field appearance="outline" >
+                <mat-label style="font-size:18px">Nombre Sede:</mat-label>
+                <input  matInput    /> 
+                    <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" >
+                <mat-label style="font-size:18px">Direccion:</mat-label>
+                <input  matInput    /> 
+                    <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+            </mat-form-field>
+
+        </div>
+
+        <div class="tp-container" fxFlexOrder="3"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
+
+            <mat-form-field appearance="outline" >
+                <mat-label style="font-size:18px">Departamento:</mat-label>
+                <mat-select >
+                    <mat-option  value="14">LIMA</mat-option>
+                    <mat-option  value="15">HUARAZ</mat-option>
+                    <mat-option  value="16">PIURA</mat-option>
+               </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" >
+                <mat-label style="font-size:18px">Pronvincia:</mat-label>
+                <mat-select >
+                    <mat-option  value="14">LIMA</mat-option>
+                    <mat-option  value="15">HUARAZ</mat-option>
+                    <mat-option  value="16">PIURA</mat-option>
+               </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" >
+                <mat-label style="font-size:18px">Distrito:</mat-label>
+                <mat-select >
+                    <mat-option  value="14">LIMA</mat-option>
+                    <mat-option  value="15">HUARAZ</mat-option>
+                    <mat-option  value="16">PIURA</mat-option>
+               </mat-select>
+            </mat-form-field>
+
+        </div>
+
+        <div class="tp-container" fxFlexOrder="1"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">                           
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Observación:</mat-label>
+                <textarea matInput  maxlength ="100"></textarea>
+                <mat-icon matSuffix style="font-size: 1.5em">text_format</mat-icon>
+               
+            </mat-form-field>                    
+        </div>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions style="width: 100%;" fxLayoutAlign="center center">
+        <button mat-raised-button    color="primary" > <mat-icon>done_outline</mat-icon> Nuevo</button>
+        <button mat-raised-button   color="warn" ng-click="cancelar()"><mat-icon>clear_all</mat-icon> Limpiar</button>
+        <button class="btn btn-default" mat-raised-button type="button"  color="accent" (click)="cancelar()"><mat-icon>close</mat-icon> Cancelar</button>
+     </mat-dialog-actions>
+ 
+</section>
+ 

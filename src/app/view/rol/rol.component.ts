@@ -93,7 +93,7 @@ export class RolComponent implements OnInit {
     let roldata = rol != null ? rol : new Rol();
     this.dialog.open(RolDialogComponent, {
       width: '800px',
-      height: '400px',
+      /*height: '400px',*/
       data: roldata
     })
     .afterClosed().subscribe( resultado => {      

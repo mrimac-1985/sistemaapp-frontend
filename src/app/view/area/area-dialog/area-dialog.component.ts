@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-area-dialog',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AreaDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private dialogRef: MatDialogRef<AreaDialogComponent>
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  cancelar(): void {
+    this.dialogRef.close();
   }
 
 }

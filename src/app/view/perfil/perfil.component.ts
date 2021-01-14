@@ -80,7 +80,7 @@ export class PerfilComponent implements OnInit {
     let perfildata = perfil != null ? perfil : new Perfil();
     this.dialog.open(PerfilDialogComponent, {
       width: '800px',
-      height: '400px',
+      /*height: '400px',*/
       data: perfildata
     })
     .afterClosed().subscribe( resultado => {      

@@ -79,8 +79,7 @@ export class SedeComponent implements OnInit {
   openDialog(sede?: Sede) {
     let sededata = sede != null ? sede : new Sede();
     this.dialog.open(SedeDialogComponent, {
-      width: '800px',
-      height: '400px',
+      width: '700px',
       data: sededata
     })
     .afterClosed().subscribe( resultado => {      
