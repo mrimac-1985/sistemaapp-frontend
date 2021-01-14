@@ -76,8 +76,10 @@ export class UsuarioComponent implements OnInit {
       this.pagina = new Pageable();
       this.pagina.pageNumber =page*side;
       this.pagina.pageSize =side;
-
+      this.pagina.palabraClave = this.formBuscar.value['palabraclave'] ;
       
+
+
       this.operadorServicio.listarPageableOpe(this.pagina).subscribe(respuestabase => {
       this.cantidad = respuestabase.data[0].totalElements;      
       this.dataSource = new MatTableDataSource(respuestabase.data[0].content);      
@@ -92,10 +94,10 @@ export class UsuarioComponent implements OnInit {
     /*MUESTRA MENSAJE*/
     this.operadorServicio.mensajeCambio.subscribe(data => {
 
-      this.notificacion.mostrarNtificacion(data,'OK','exito');
+      this.notificacion.mostrarNotificacion(data,'OK','exito');
     }),(error : any) =>{
 
-      this.notificacion.mostrarNtificacion(error,'OK','error');
+      this.notificacion.mostrarNotificacion(error,'OK','error');
     }; 
 
   }
@@ -112,7 +114,10 @@ export class UsuarioComponent implements OnInit {
     .afterClosed().subscribe( resultado => {
       console.log('resultado ->'+resultado);
       this.refrescarTabla();
-      this.formBuscar.reset();
+      
+      //this.formBuscar.reset();
+
+
       if (resultado === 1) {
         console.log(resultado);
         // After dialog is closed we're doing frontend updates
@@ -135,7 +140,7 @@ export class UsuarioComponent implements OnInit {
       data: ope
     })
     .afterClosed().subscribe( resultado => {
-      console.log('resultado ->'+resultado);
+  
       this.refrescarTabla();       
     }
     );
@@ -167,7 +172,7 @@ export class UsuarioComponent implements OnInit {
     this.pagina.pageNumber =0;
     this.pagina.pageSize =10;
     this.pagina.palabraClave= this.formBuscar.value['palabraclave'];
-    console.log(this.formBuscar.value['palabraclave']);
+
 
     this.operadorServicio.listarPageableOpe(this.pagina).subscribe(respuestabase => {
       this.cantidad = respuestabase.data[0].totalElements;      
@@ -186,7 +191,9 @@ export class UsuarioComponent implements OnInit {
     this.pagina = new Pageable();
     this.pagina.pageNumber =e.pageIndex*e.pageSize;
     this.pagina.pageSize =e.pageSize;
-          
+    this.pagina.palabraClave = this.formBuscar.value['palabraclave'] ;
+
+
     this.operadorServicio.listarPageableOpe(this.pagina).subscribe(RespuestaBase => {
       this.cantidad = RespuestaBase.data[0].totalElements;
       this.dataSource = new MatTableDataSource( RespuestaBase.data[0].content);

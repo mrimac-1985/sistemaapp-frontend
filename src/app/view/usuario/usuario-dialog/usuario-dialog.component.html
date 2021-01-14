@@ -13,10 +13,10 @@
 
     <mat-tab label="OPERADOR">
         <p>
-            <div class="tp-container" fxFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
-                <mat-form-field appearance="outline" >
+            <div class="tp-container" fxFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" >
+                <mat-form-field appearance="outline"  >
                     <mat-label style="font-size:18px">Tipo de Documento:</mat-label>
-                    <mat-select placeholder="Tipo Documento" [(value)]="idTipoDocumento" formControlName ='sidtipodoc' required>
+                    <mat-select placeholder="Tipo Documento"   formControlName ='sidtipodoc' required>
                         <mat-option *ngFor="let v of tipodocumentocombo" [value]="v.sidtipodoc">
                           {{v.sdescripcion}}
                         </mat-option>
@@ -28,7 +28,7 @@
                     </div>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" >
+                <mat-form-field appearance="outline"  >
                     <mat-label>Número Documento:</mat-label>
                     <input  matInput   formControlName="snumdocu" required /> 
                     <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
@@ -93,7 +93,7 @@
             <div class="tp-container" fxFlexOrder="3"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" >
                     <mat-label style="font-size:18px">Genero:</mat-label>
-                    <mat-select placeholder="Perfil" [(value)]="idcombogenero" formControlName ='sgenero' required>
+                    <mat-select placeholder="Perfil" formControlName ='sgenero' required>
                         <mat-option  value="M">MASCULINO</mat-option>
                         <mat-option  value="F">FEMENINO</mat-option>
                         <mat-option  value="O">OTROS</mat-option>
@@ -201,7 +201,7 @@
                 <div class="tp-container"  fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
                     <mat-form-field appearance="outline" >
                         <mat-label style="font-size:18px">Rol:</mat-label>
-                        <mat-select placeholder="Perfil" [(value)]="idRolCombo" formControlName='nidRol'>
+                        <mat-select placeholder="Perfil"  formControlName='nidRol'>
                             <mat-option *ngFor="let v of rolCombo" [value]="v.nidrol">
                               {{v.snombrerol}}
                             </mat-option>
@@ -215,7 +215,7 @@
 
                     <mat-form-field appearance="outline" >
                         <mat-label style="font-size:18px">Area:</mat-label>
-                        <mat-select placeholder="Area" [(value)]="idarecombo" formControlName ='nidarea'>
+                        <mat-select placeholder="Area" formControlName ='nidarea'>
                             <mat-option *ngFor="let v of areaCombo" [value]="v.nidarea">
                               {{v.snombre}}
                             </mat-option>
@@ -229,7 +229,7 @@
 
                     <mat-form-field appearance="outline" >
                         <mat-label style="font-size:18px">Perfil:</mat-label>
-                        <mat-select placeholder="Perfil" [(value)]="idperfilcombo" formControlName='nidperfil'>
+                        <mat-select placeholder="Perfil" formControlName='nidperfil'>
                             <mat-option *ngFor="let v of perfilCombo" [value]="v.nidperfil">
                               {{v.snombreperfil}}
                             </mat-option>
@@ -250,6 +250,20 @@
 
     <mat-tab label="BIOMETRÍA">
         <p>
+
+            <div class="tp-container"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
+
+                <div class="tp-container"   fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
+                    <img [src]="imagenData || '../../../assets/iconos/userless.png'"  width="50px" height="400px" />
+                </div>         
+        
+                <div class="tp-container"  fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">                   
+                        <button mat-raised-button  color="default" ng-click="seleccionarimagen()" > 
+                        <mat-icon>done_outline</mat-icon> Seleccionar imagen </button>                 
+                </div>
+                
+            </div>
+
 
     </mat-tab>
 

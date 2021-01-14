@@ -4,7 +4,7 @@ import { Operador } from './../../../_model/operador';
 import { RolService } from './../../../_service/rol.service';
 import { PerfilService } from 'src/app/_service/perfil.service';
 import { AreaService } from 'src/app/_service/area.service';
-import { Component, OnInit, Inject, ɵConsole, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, ɵConsole, OnDestroy, NgModule } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Usuario } from 'src/app/_model/usuario';
 import { Area } from 'src/app/_model/area';
@@ -15,6 +15,7 @@ import { TipoDocumento } from 'src/app/_model/tipodocumento';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { ValidatorService } from 'src/app/util/ValidatorService';
+import { ImagenService } from 'src/app/util/imagen.service';
 
 @Component({
   selector: 'app-usuario-dialog',
@@ -32,13 +33,6 @@ export class UsuarioDialogComponent implements OnInit {
   perfilCombo: Perfil[];
   rolCombo: Rol[];
   tipodocumentocombo: TipoDocumento[];
-
-  /*ID COMBOS*/
-  idarecombo: number;
-  idperfilcombo: number;
-  idRolCombo: number;
-  idcombogenero: string;
-  idTipoDocumento: string;
 
   /**NOMBRE BOTON*/
   nombreboton: string;
@@ -71,8 +65,8 @@ export class UsuarioDialogComponent implements OnInit {
   val_nidarea: string;
   val_nidperfil: string;
 
-
-
+  /*FOTO */
+  imagenData: any;
 
   constructor(
     private dialogRef: MatDialogRef<UsuarioDialogComponent>,
@@ -84,7 +78,8 @@ export class UsuarioDialogComponent implements OnInit {
     private perfilService: PerfilService,
     private rolService: RolService,
     private formBuilder: FormBuilder,
-    public _validator: ValidatorService
+    public _validator: ValidatorService,
+    public imagenservicio : ImagenService
   ) {
 
     
@@ -98,6 +93,7 @@ export class UsuarioDialogComponent implements OnInit {
     this.listarArea();
     this.listarRoles();
     this.listarTipoDocumento();
+
 
     /*se crea objeto de usuario y operador*/
     this.operadorDto = new OperadorDto();
@@ -141,6 +137,8 @@ export class UsuarioDialogComponent implements OnInit {
       nidperfil:  new FormControl(this.operadorDto.nidperfil, Validators.required) , 
       nidRol:  new FormControl(this.operadorDto.nidrol, Validators.required) 
     });
+
+    this.consultarImagen();
 
   }
 
@@ -266,32 +264,18 @@ export class UsuarioDialogComponent implements OnInit {
    get nidarea(){ return this.val_nidarea = this._validator?.isValid('nidarea',this.formOperador);  }
    get nidperfil(){ return this.val_nidperfil = this._validator?.isValid('nidperfil',this.formOperador);  }
    
+   
+seleccionarimagen(){
+
+}
+
+consultarImagen() {
   
+  let idoperador : number = this.formOperador.value['nidoperador'];   
+  this.operadorServicio.consultarImagenOperador(idoperador).subscribe(RespuestaBase=>{    
+    this.imagenData = this.imagenservicio.convertir(RespuestaBase.data[0].ximagen);
+  });
+}
 
 
-//  public getMensajeError(field: string): string {
-//     let mensaje = '';
-
-//     if (this.formOperador.get(field).errors.required) {
-//       mensaje = field+ 'El campo es requerido.';
-//     } else if (this.formOperador.get(field).hasError('pattern')) {
-//       mensaje = 'No valido.';
-//     } else if (this.formOperador.get(field).hasError('minLength')) {
-//       const minLength = this.formOperador.get(field).errors?.minLength
-//         .requiredLength;
-//       mensaje = 'EL campo debe ser mayor que ' + minLength + ' caracteres.';
-//     } 
-
-//     console.log('---------------------------------> ' + mensaje);
-
-//     return mensaje;
-//   }
-
-//   public esCampoValido(field: string): boolean {
-//     return (
-//       (this.formOperador.get(field).touched ||
-//         this.formOperador.get(field).dirty) &&
-//       this.formOperador.get(field).valid
-//     );
-//   }
 }

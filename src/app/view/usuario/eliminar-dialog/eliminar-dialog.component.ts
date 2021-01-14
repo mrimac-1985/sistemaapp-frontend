@@ -35,21 +35,14 @@ export class EliminarDialogComponent implements OnInit {
     this.dialogo.close(false);
   }
 
-
-  confirmado(){
-    
-    this.dialogo.close(true);
-
-    
-  }
+ 
 
   elminarOperador(){
     this.operadorServicio.eliminar(this.idOperador).subscribe(RespuestaBase =>
-      {     
-        this.usuarioService.mensajeCambio.next(RespuestaBase.mensaje);  
-      })
-
-      this.dialogo.close(true);
+    {     
+        this.operadorServicio.mensajeCambio.next(RespuestaBase.mensaje);  
+    })
+    this.dialogo.close(true);
   }
 
 }

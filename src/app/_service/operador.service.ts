@@ -13,6 +13,7 @@ export class OperadorService {
 
 
 
+
   operadorCambio = new Subject<Operador[]>();
   mensajeCambio = new Subject<string>();
   listaCambio = new Subject<Operador[]>();
@@ -63,6 +64,10 @@ export class OperadorService {
   }
   generarReporte(tiporeporte: string) {
     return this.http.post<any>(this.url+'/generarReporte',tiporeporte);
+  }
+
+  consultarImagenOperador(idoperador: number) {
+    return this.http.post<any>(this.url+'/consultarimagenoperador',idoperador);
   }
 
 }
