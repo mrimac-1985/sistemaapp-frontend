@@ -39,28 +39,29 @@
 
         <div class="tp-container" fxFlexOrder="3"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
 
-            <mat-form-field appearance="outline" >
-                <mat-label style="font-size:18px">Departamento:</mat-label>
-                <mat-select formControlName ='departamento' >
-                    <mat-option  value="14">LIMA</mat-option>
-                    <mat-option  value="15">HUARAZ</mat-option>
-                    <mat-option  value="16">PIURA</mat-option>
-               </mat-select>
-               <div  *ngIf="departamento">
-                    <span style="color: #ff002b;">
-                        {{val_departamento}}
-                    </span>
+            <mat-form-field appearance="outline" > 
+
+               <mat-label style="font-size:18px">Departamento:</mat-label>
+               <mat-select    formControlName ='departamento' required (selectionChange)="listarProvincia($event.value)">
+                    <mat-option *ngFor="let v of departamentocombo" [value]="v.sidubigeo">
+                    {{v.snombre}}
+                    </mat-option>
+                </mat-select>
+                <div  *ngIf="departamento">
+                        <span style="color: #ff002b;">
+                            {{val_departamento}}
+                        </span>
                 </div>
             </mat-form-field>
 
             <mat-form-field appearance="outline" >
-                <mat-label style="font-size:18px">Provincia:</mat-label>
-                <mat-select formControlName ='provincia' >
-                    <mat-option  value="14">LIMA</mat-option>
-                    <mat-option  value="15">HUARAZ</mat-option>
-                    <mat-option  value="16">PIURA</mat-option>
-               </mat-select>
-               <div  *ngIf="provincia">
+                <mat-label style="font-size:18px">Provincia:</mat-label>               
+               <mat-select    formControlName ='provincia' required (selectionChange)="listarDistrito($event.value)">
+                <mat-option *ngFor="let v of provinciacombo" [value]="v.sidubigeo">
+                {{v.snombre}}
+                </mat-option>
+            </mat-select>
+            <div  *ngIf="provincia">
                     <span style="color: #ff002b;">
                         {{val_provincia}}
                     </span>
@@ -68,12 +69,13 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline" >
-                <mat-label style="font-size:18px">Distrito:</mat-label>
-                <mat-select formControlName ='distrito'>
-                    <mat-option  value="14">LIMA</mat-option>
-                    <mat-option  value="15">HUARAZ</mat-option>
-                    <mat-option  value="16">PIURA</mat-option>
-               </mat-select>
+                <mat-label style="font-size:18px">Distrito:</mat-label>               
+               <mat-select    formControlName ='distrito' required >
+                    <mat-option *ngFor="let v of distritocombo" [value]="v.sidubigeo">
+                    {{v.snombre}}
+                    </mat-option>
+                </mat-select>
+
                <div  *ngIf="distrito">
                     <span style="color: #ff002b;">
                         {{val_distrito}}
