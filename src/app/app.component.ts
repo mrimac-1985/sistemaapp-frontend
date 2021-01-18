@@ -107,9 +107,6 @@ export class AppComponent implements OnInit {
       this.idsesion  = data.toString();       
     }); 
   
-    
- 
-
   }
   
   ngOnDestroy(): void{
