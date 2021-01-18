@@ -1,0 +1,73 @@
+mat-grid-tile {
+    background: lightblue;
+ }
+
+ .invalido {
+    color: red;
+  }
+  
+ 
+ .tp-container {
+   display: flex;
+   flex-direction: column;   
+ }
+.tp-container > * {
+   width: 100%;
+   
+ }
+
+.task-header {
+   background-color: transparent;
+   padding: 0 5px;
+    height: 20px;
+ }
+.fx-spacer {
+   flex: 1 1 auto;
+ }
+
+
+.dialog-headline{
+   font-weight: 400;
+   height: 5px;
+   margin-top: -1em;
+   margin-left: -1em;
+   margin-right: -1em;
+   margin-bottom: 2;
+   padding: 1em;
+   text-align: center;
+   font-size: 1.5em;
+   background-color: rgb(89, 0, 255);
+   color:white;
+ }
+
+
+ .mat-divider-vertical{
+   height: 100%;
+   width: 0px !important;
+   position: inherit !important;
+ }
+
+
+ .header {
+   padding: 16px;
+   height: 13px;
+   margin-top: -30px;
+   vertical-align: top;
+   text-align: center;
+   margin-left: -24px;
+   margin-right: -24px; 
+   background: #4055c9;
+   color: white;
+   font-size: 20px;
+}
+
+     
+/*INCIO MENSJE ERROR*/
+
+input.error, input select.error {
+   border: 1px solid red;
+}
+
+label.error{
+   color:red;
+}

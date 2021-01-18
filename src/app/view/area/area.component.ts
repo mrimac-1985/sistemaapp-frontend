@@ -83,7 +83,7 @@ export class AreaComponent implements OnInit {
     let areadata = area != null ? area : new Area();
     this.dialog.open(AreaDialogComponent, {
       width: '800px',
-      height: '400px',
+      /*height: '400px',*/
       data: areadata
     })
     .afterClosed().subscribe( resultado => {      
