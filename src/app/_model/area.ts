@@ -6,6 +6,7 @@ export class Area{
     sobservacion: string;
     bactivo: boolean;
     dfechareg: string;
+    nidsede : number;
     sede: Sede;
     nidsesion: number;
     

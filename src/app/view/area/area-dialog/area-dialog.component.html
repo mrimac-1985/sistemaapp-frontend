@@ -6,20 +6,32 @@
 
 <section  fxLayout="column" fxLayoutAlign="center center">
 
+ <form   [formGroup]="formarea" (ngSubmit)="operar()" style="width: 100%;">
+
     <mat-dialog-content style="width: 100%;"> 
 
         <div class="tp-container" fxFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
 
             <mat-form-field appearance="outline" >
                 <mat-label style="font-size:18px">Nombre Area:</mat-label>
-                <input  matInput    /> 
+                <input  matInput  formControlName="snombrearea"  /> 
                     <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+                    <div  *ngIf="snombre">
+                        <span style="color: #ff002b;">
+                            {{val_snombre}}
+                        </span>
+                    </div>
             </mat-form-field>
 
             <mat-form-field appearance="outline" >
                 <mat-label style="font-size:18px">Id Sede:</mat-label>
-                <input  matInput    /> 
+                <input  matInput  formControlName="sede"  /> 
                     <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+                    <div  *ngIf="sede">
+                        <span style="color: #ff002b;">
+                            {{val_sede}}
+                        </span>
+                    </div>
             </mat-form-field>
 
         </div>
@@ -28,8 +40,13 @@
 
             <mat-form-field appearance="outline" >
                 <mat-label style="font-size:18px">Id Sesion:</mat-label>
-                <input  matInput    /> 
+                <input  matInput  formControlName="sesion" /> 
                     <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+                    <div  *ngIf="sesion">
+                        <span style="color: #ff002b;">
+                            {{val_nsesion}}
+                        </span>
+                    </div>
             </mat-form-field>
 
         </div>
@@ -45,9 +62,12 @@
     </mat-dialog-content>
 
     <mat-dialog-actions style="width: 100%;" fxLayoutAlign="center center">
-        <button mat-raised-button    color="primary" > <mat-icon>done_outline</mat-icon> Nuevo</button>
-        <button mat-raised-button   color="warn" ng-click="cancelar()"><mat-icon>clear_all</mat-icon> Limpiar</button>
+        <button mat-raised-button  type="submit"  color="primary" > <mat-icon>done_outline</mat-icon>{{nombreboton}}</button>
+        <button mat-raised-button  type="reset" color="warn" ng-click="cancelar()"><mat-icon>clear_all</mat-icon> Limpiar</button>
         <button class="btn btn-default" mat-raised-button type="button"  color="accent" (click)="cancelar()"><mat-icon>close</mat-icon> Cancelar</button>
-     </mat-dialog-actions>
+     
+    </mat-dialog-actions>
+
+ </form>
 
 </section>

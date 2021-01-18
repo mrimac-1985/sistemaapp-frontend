@@ -215,7 +215,7 @@
 
                     <mat-form-field appearance="outline" >
                         <mat-label style="font-size:18px">Area:</mat-label>
-                        <mat-select placeholder="Area" formControlName ='nidarea'>
+                        <mat-select   formControlName ='nidarea'>
                             <mat-option *ngFor="let v of areaCombo" [value]="v.nidarea">
                               {{v.snombre}}
                             </mat-option>

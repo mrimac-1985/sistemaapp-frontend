@@ -1,1 +1,34 @@
-<p>parametro works!</p>
+ 
+<div *ngIf="cadena">
+    <p  > hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo </p>
+    <p  > hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo </p>
+    <p  > hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo </p>
+    <p  > hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo </p>
+    <p  > hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo </p>
+    <p  > hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo </p>
+    <p  > hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo </p>
+    <p  > hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo </p>
+    <p  > hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo </p>
+    <p  > hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo </p>
+    <p  > hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo hola mundo </p>
+</div>
+
+
+
+<div *ngFor="let elemento of miarray" >    
+    <p  >el valor del parrafo es {{elemento}}</p>
+</div>
+
+
+<h1>Frutas en el canasto</h1>
+<div *ngFor="let frutas of canasto">
+    <p>El canasto contiene {{frutas}}</p>     
+</div>
+
+
+
+<div [ngSwitch]="estado">
+    <p *ngSwitchCase="1">El estado es 1</p>
+    <p *ngSwitchCase="2">El estado es 2</p>
+    <p *ngSwitchDefault>No es ningún estado conocido</p>
+</div>

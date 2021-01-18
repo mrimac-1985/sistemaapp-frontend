@@ -7,6 +7,7 @@
 
 <section  fxLayout="column" fxLayoutAlign="center center">
 
+    <form   [formGroup]="formsede" (ngSubmit)="operar()" style="width: 100%;">
 
     <mat-dialog-content style="width: 100%;"> 
 
@@ -14,14 +15,24 @@
 
             <mat-form-field appearance="outline" >
                 <mat-label style="font-size:18px">Nombre Sede:</mat-label>
-                <input  matInput    /> 
-                    <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+                <input  matInput  formControlName="snombre"   /> 
+                <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+                <div  *ngIf="snombre">
+                    <span style="color: #ff002b;">
+                        {{val_snombre}}
+                    </span>
+                </div>
             </mat-form-field>
 
             <mat-form-field appearance="outline" >
                 <mat-label style="font-size:18px">Direccion:</mat-label>
-                <input  matInput    /> 
+                <input  matInput formControlName="sdireccion"  /> 
                     <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+                    <div  *ngIf="sdireccion">
+                        <span style="color: #ff002b;">
+                            {{val_sdireccion}}
+                        </span>
+                    </div>
             </mat-form-field>
 
         </div>
@@ -30,29 +41,44 @@
 
             <mat-form-field appearance="outline" >
                 <mat-label style="font-size:18px">Departamento:</mat-label>
-                <mat-select >
+                <mat-select formControlName ='departamento' >
                     <mat-option  value="14">LIMA</mat-option>
                     <mat-option  value="15">HUARAZ</mat-option>
                     <mat-option  value="16">PIURA</mat-option>
                </mat-select>
+               <div  *ngIf="departamento">
+                    <span style="color: #ff002b;">
+                        {{val_departamento}}
+                    </span>
+                </div>
             </mat-form-field>
 
             <mat-form-field appearance="outline" >
-                <mat-label style="font-size:18px">Pronvincia:</mat-label>
-                <mat-select >
+                <mat-label style="font-size:18px">Provincia:</mat-label>
+                <mat-select formControlName ='provincia' >
                     <mat-option  value="14">LIMA</mat-option>
                     <mat-option  value="15">HUARAZ</mat-option>
                     <mat-option  value="16">PIURA</mat-option>
                </mat-select>
+               <div  *ngIf="provincia">
+                    <span style="color: #ff002b;">
+                        {{val_provincia}}
+                    </span>
+                </div>
             </mat-form-field>
 
             <mat-form-field appearance="outline" >
                 <mat-label style="font-size:18px">Distrito:</mat-label>
-                <mat-select >
+                <mat-select formControlName ='distrito'>
                     <mat-option  value="14">LIMA</mat-option>
                     <mat-option  value="15">HUARAZ</mat-option>
                     <mat-option  value="16">PIURA</mat-option>
                </mat-select>
+               <div  *ngIf="distrito">
+                    <span style="color: #ff002b;">
+                        {{val_distrito}}
+                    </span>
+                </div>
             </mat-form-field>
 
         </div>
@@ -61,18 +87,25 @@
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Observación:</mat-label>
                 <textarea matInput  maxlength ="100"></textarea>
+                <input  matInput  formControlName="observacion" /> 
                 <mat-icon matSuffix style="font-size: 1.5em">text_format</mat-icon>
-               
+                <div  *ngIf="observacion">
+                    <span style="color: #ff002b;">
+                        {{val_observacion}}
+                    </span>
+                </div>
             </mat-form-field>                    
         </div>
 
     </mat-dialog-content>
 
-    <mat-dialog-actions style="width: 100%;" fxLayoutAlign="center center">
-        <button mat-raised-button    color="primary" > <mat-icon>done_outline</mat-icon> Nuevo</button>
-        <button mat-raised-button   color="warn" ng-click="cancelar()"><mat-icon>clear_all</mat-icon> Limpiar</button>
-        <button class="btn btn-default" mat-raised-button type="button"  color="accent" (click)="cancelar()"><mat-icon>close</mat-icon> Cancelar</button>
-     </mat-dialog-actions>
+        <mat-dialog-actions style="width: 100%;" fxLayoutAlign="center center">
+            <button mat-raised-button  type="submit"   color="primary" > <mat-icon>done_outline</mat-icon> {{nombreboton}}</button>
+            <button mat-raised-button  type="reset"  color="warn" ng-click="cancelar()"><mat-icon>clear_all</mat-icon> Limpiar</button>
+            <button class="btn btn-default" mat-raised-button type="button"  color="accent" (click)="cancelar()"><mat-icon>close</mat-icon> Cancelar</button>
+        </mat-dialog-actions>
  
+    </form>
+
 </section>
  

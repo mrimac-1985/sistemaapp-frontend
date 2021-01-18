@@ -6,45 +6,68 @@
 
 <section  fxLayout="column" fxLayoutAlign="center center">
 
-    <mat-dialog-content style="width: 100%;"> 
+    <form   [formGroup]="formperfil" (ngSubmit)="operar()" style="width: 100%;">
 
-     <div class="tp-container" fxFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
+     <mat-dialog-content style="width: 100%;"> 
+
+      <div class="tp-container" fxFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
 
         <mat-form-field appearance="outline" >
             <mat-label style="font-size:18px">Nombre Perfil:</mat-label>
-            <input  matInput    /> 
+            <input  matInput formControlName="snombreperfil"   />
                 <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+                <div  *ngIf="snombre">
+                    <span style="color: #ff002b;">
+                        {{val_snombre}}
+                    </span>
+                </div>
         </mat-form-field>
 
         <mat-form-field appearance="outline" >
             <mat-label style="font-size:18px">Sesiones por Usuario:</mat-label>
-            <input  matInput    /> 
+            <input  matInput formControlName="nsesionesporusuario"  /> 
                 <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+                <div  *ngIf="nsesionusuario">
+                    <span style="color: #ff002b;">
+                        {{val_nsesionusuario}}
+                    </span>
+                </div>
         </mat-form-field>
 
-     </div>
+      </div>
 
      <div class="tp-container" fxFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
 
         <mat-form-field appearance="outline" >
             <mat-label style="font-size:18px">Tiempo Conexión:</mat-label>
-            <input  matInput    /> 
+            <input  matInput formControlName="ntiempoconexion" /> 
                 <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+                <div  *ngIf="ntiempoconexion">
+                    <span style="color: #ff002b;">
+                        {{val_ntiempoconexion}}
+                    </span>
+                </div>
         </mat-form-field>
 
         <mat-form-field appearance="outline" >
             <mat-label style="font-size:18px">Tiempo Password Día:</mat-label>
-            <input  matInput    /> 
+            <input  matInput  formControlName="ntiempopasword" /> 
                 <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+                <div  *ngIf="ntiempopasword">
+                    <span style="color: #ff002b;">
+                        {{val_ntiempopasword}}
+                    </span>
+                </div>
         </mat-form-field>
 
      </div>
-    </mat-dialog-content>
+        </mat-dialog-content>
 
-    <mat-dialog-actions style="width: 100%;" fxLayoutAlign="center center">
-        <button mat-raised-button    color="primary" > <mat-icon>done_outline</mat-icon> Nuevo</button>
-        <button mat-raised-button   color="warn" ng-click="cancelar()"><mat-icon>clear_all</mat-icon> Limpiar</button>
-        <button class="btn btn-default" mat-raised-button type="button"  color="accent" (click)="cancelar()"><mat-icon>close</mat-icon> Cancelar</button>
-    </mat-dialog-actions> 
+        <mat-dialog-actions style="width: 100%;" fxLayoutAlign="center center">
+            <button mat-raised-button  type="submit"  color="primary" > <mat-icon>done_outline</mat-icon>{{nombreboton}}</button>
+            <button mat-raised-button  type="reset" color="warn" ng-click="cancelar()"><mat-icon>clear_all</mat-icon> Limpiar</button>
+            <button class="btn btn-default" mat-raised-button type="button"  color="accent" (click)="cancelar()"><mat-icon>close</mat-icon> Cancelar</button>
+        </mat-dialog-actions> 
 
+    </form>
 </section>
