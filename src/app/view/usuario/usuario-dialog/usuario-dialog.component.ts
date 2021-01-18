@@ -116,7 +116,7 @@ export class UsuarioDialogComponent implements OnInit {
       this.operadorDto.operador = this.operador;
       this.nombreboton = 'Registrar';
     }
- 
+ {}
   
     this.formOperador = this.formBuilder.group({
       nidoperador:  new FormControl(this.operadorDto.operador.nidoperador ) , 
@@ -275,6 +275,11 @@ consultarImagen() {
   this.operadorServicio.consultarImagenOperador(idoperador).subscribe(RespuestaBase=>{    
     this.imagenData = this.imagenservicio.convertir(RespuestaBase.data[0].ximagen);
   });
+}
+
+select(plan: string)
+{
+    console.log('COMBO->'+plan)
 }
 
 

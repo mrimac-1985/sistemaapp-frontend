@@ -45,11 +45,13 @@ export class LoginComponent implements OnInit , OnDestroy{
 
   ngOnInit(): void {
 
+
   
     this.formUsuario = this.formBuilder.group({
       usuario:  new FormControl('MAX', [Validators.required] ) , 
       contraseña:  new FormControl('') 
     });
+    
   }
 
 
