@@ -16,7 +16,7 @@
             <div class="tp-container" fxFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" >
                 <mat-form-field appearance="outline"  >
                     <mat-label style="font-size:18px">Tipo de Documento:</mat-label>
-                    <mat-select   formControlName ='sidtipodoc' required>
+                    <mat-select placeholder="Tipo Documento"   formControlName ='sidtipodoc' required (selectionChange)="select($event.value)">
                         <mat-option *ngFor="let v of tipodocumentocombo" [value]="v.sidtipodoc">
                           {{v.sdescripcion}}
                         </mat-option>

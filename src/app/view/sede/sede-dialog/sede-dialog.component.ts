@@ -1,8 +1,10 @@
+import { UbigeoService } from './../../../_service/ubigeo.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Sede } from 'src/app/_model/sede';
 import { ValidatorService } from 'src/app/util/ValidatorService';
+import { Ubigeo } from 'src/app/_model/ubigeo';
 
 @Component({
   selector: 'app-sede-dialog',
@@ -13,6 +15,9 @@ export class SedeDialogComponent implements OnInit {
 
 
   sede : Sede;
+  departamentocombo : Ubigeo[];
+  provinciacombo : Ubigeo[];
+  distritocombo : Ubigeo[];
 
   /*boton */
   nombreboton: string;
@@ -32,11 +37,14 @@ export class SedeDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<SedeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data_dialog: Sede,
     private formBuilder: FormBuilder,
-    public _validator: ValidatorService
+    public _validator: ValidatorService,
+    public ubigeoservice: UbigeoService
   ) { }
 
   ngOnInit(): void {
 
+    this.listarDepartamento();
+ 
     this.sede = new Sede();
 
     if(this.data_dialog.nidsede != null ){
@@ -51,14 +59,38 @@ export class SedeDialogComponent implements OnInit {
       nidsede :  new FormControl(this.sede.nidsede),
       snombre :  new FormControl(this.sede.snombre, [Validators.required, Validators.minLength(8),Validators.maxLength(50)]),
       sdireccion : new FormControl(this.sede.sdireccion, [Validators.required, Validators.minLength(8),Validators.maxLength(50)]),
-      departamento : new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(50)]),
-      provincia : new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(50)]),
-      distrito : new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(50)]),
+      departamento : new FormControl('', [Validators.required]),
+      provincia : new FormControl('', [Validators.required]),
+      distrito : new FormControl('', [Validators.required]),
       observacion : new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(50)])
 
     });
 
   }
+
+  listarDepartamento() {
+ 
+    this.ubigeoservice.listarDepartamento().subscribe(respuestabase=>{
+      this.departamentocombo = respuestabase.data;
+    });
+  }
+
+  listarProvincia(iddepartamento : string) { 
+    this.provinciacombo = [];
+    this.distritocombo = [];
+
+    this.ubigeoservice.listarProvincia(iddepartamento).subscribe(respuestabase=>{
+      this.provinciacombo = respuestabase.data;
+    });
+  }
+
+  listarDistrito(idprivincia : string) {
+    this.distritocombo = [];
+    this.ubigeoservice.listarDistrito(idprivincia).subscribe(respuestabase=>{
+      this.distritocombo = respuestabase.data;
+    });
+  }
+  
 
 
   cancelar(): void {
@@ -75,6 +107,12 @@ export class SedeDialogComponent implements OnInit {
 
   }
 
+  select(plan: string)
+  {
+      console.log('COMBO->'+plan)
+  }
+
+  
 
   get snombre() { 
     return this.val_snombre = this._validator?.isValid('snombre',this.formsede); 

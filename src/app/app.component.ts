@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Configuracion } from './_model/configuracion';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SesionService } from './_service/sesion.service';
 
  
 
@@ -63,13 +64,15 @@ export class AppComponent implements OnInit {
     private http: HttpClient,
     private dialog: MatDialog,
     public loginService: LoginService,
-    private sanitization: DomSanitizer
+    private sanitization: DomSanitizer,
+    private sesionservicio: SesionService
   ) {  
 
     
   }
   
 
+  
 
   ngOnInit() {
 
@@ -104,12 +107,12 @@ export class AppComponent implements OnInit {
       this.idsesion  = data.toString();       
     }); 
   
-    
- 
-
   }
   
-
+  ngOnDestroy(): void{
+     
+    this.sesionservicio.cerrarSesion(Number(sessionStorage.getItem('idsesion'))).subscribe();
+  }
 
 
   /** borrar este meteodo luego de la seguridad*/

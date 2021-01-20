@@ -46,8 +46,7 @@ export class SesionService {
   }
 
   cerrarSesion(usaurio: number) {
-    console.log(usaurio);
-    return this.http.post(this.url+'/cerrarsesion', String(usaurio));
+    return this.http.post(this.url+'/cerrarsesion', usaurio);
   }
  
 

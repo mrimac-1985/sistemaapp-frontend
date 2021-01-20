@@ -25,8 +25,7 @@ export class LoginService {
 
     sessionStorage.clear();
     this.router.navigate(['login']);
-
-    
+ 
   
   }
 
