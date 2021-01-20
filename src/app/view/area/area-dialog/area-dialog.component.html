@@ -24,14 +24,18 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline" >
-                <mat-label style="font-size:18px">Id Sede:</mat-label>
-                <input  matInput  formControlName="sede"  /> 
-                    <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+                <mat-label style="font-size:18px">Sede:</mat-label>
+                <mat-select   formControlName ='sede' required>
+                    <mat-option *ngFor="let v of sedeCombo" [value]="v.nidsede">
+                      {{v.snombre}}
+                    </mat-option>
+                </mat-select>
                     <div  *ngIf="sede">
                         <span style="color: #ff002b;">
                             {{val_sede}}
                         </span>
-                    </div>
+                    </div>  
+
             </mat-form-field>
 
         </div>

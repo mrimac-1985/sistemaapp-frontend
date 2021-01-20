@@ -61,12 +61,12 @@ export class LoginComponent implements OnInit , OnDestroy{
     
  
   
-      this.v_usaurio=this.formUsuario.value['usuario'];; 
+      this.v_usaurio=this.formUsuario.value['usuario'];
   
       /*LISTAR MENU DEL USUARIO*/   
         this.menuService.listarPorUsuario(this.v_usaurio).subscribe(respuestabase => {
 
-          console.log(respuestabase.data);
+          
           
           if(respuestabase.data[0]!== undefined){
 
@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit , OnDestroy{
 
               /*CARGAR DATOS DEL USAURIO */
               this.usuarioServiec.consutlarusuariosesion(this.v_usaurio).subscribe(respuestabase =>{
-                console.log('consulta persona'+respuestabase.data[0].scorreo);
+              
                     this.usuarioServiec.usuariosesion.next(respuestabase.data[0]);
               });
 
@@ -85,8 +85,7 @@ export class LoginComponent implements OnInit , OnDestroy{
               /*INICIAR  SESION*/         
               this.sesionService.inicarSesion(this.v_usaurio).subscribe( respuestabase  =>{
                 this.usuarioServiec.usuarioIdsesion.next(respuestabase.mensaje.toString());
-                sessionStorage.setItem("idsesion",respuestabase.mensaje.toString());
-                console.log('incia sesion->'+ respuestabase.mensaje.toString());  
+                sessionStorage.setItem("idsesion",respuestabase.mensaje.toString());                
               }
               ) ;
           }else{

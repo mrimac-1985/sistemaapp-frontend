@@ -20,7 +20,7 @@ export class SedeService {
   constructor(private http: HttpClient) { }
 
   listar(){
-    return this.http.get<Sede[]>(this.url);
+    return this.http.get<any>(this.url+'/listarsede');
   }
 
   listarPorId(id: number) {

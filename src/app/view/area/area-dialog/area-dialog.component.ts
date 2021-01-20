@@ -1,8 +1,10 @@
+import { SedeService } from './../../../_service/sede.service'
 import { Area } from './../../../_model/area'
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ValidatorService } from 'src/app/util/ValidatorService';
+import { Sede } from 'src/app/_model/sede';
 
 @Component({
   selector: 'app-area-dialog',
@@ -12,6 +14,8 @@ import { ValidatorService } from 'src/app/util/ValidatorService';
 export class AreaDialogComponent implements OnInit {
 
   area : Area;
+
+  sedeCombo : Sede[];
 
   /*boton */
   nombreboton: string;
@@ -26,11 +30,14 @@ export class AreaDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<AreaDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data_dialog: Area,
+    private sedeService : SedeService,
     private formBuilder: FormBuilder,
     public _validator: ValidatorService
   ) { }
 
   ngOnInit(): void {
+
+    this.listarSede();
 
     this.area = new Area();
 
@@ -50,15 +57,26 @@ export class AreaDialogComponent implements OnInit {
     });
   }
 
+  listarSede() {
+    this.sedeService.listar().subscribe((respuesta) => {
+      this.sedeCombo = respuesta.data;
+    });
+  }
+
   cancelar(): void {
     this.dialogRef.close();
   }
 
   operar(){
 
+
+
+
     if (this.formarea.valid) {
       /* OPERAR*/
     }
+
+
   }
 
   get snombre() { 
