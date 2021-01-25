@@ -6,5 +6,5 @@ export class Rol{
     sobservacion: string;
     bactivo: boolean;
     dfechareg: Date;
-
+    nidsesion: number;
 }

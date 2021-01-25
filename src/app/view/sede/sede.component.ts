@@ -8,6 +8,7 @@ import { Pageable } from 'src/app/_model/pageable';
 import { Sede } from 'src/app/_model/sede';
 import { SedeDialogComponent } from './sede-dialog/sede-dialog.component';
 import { EliminarSedeDialogComponent } from './eliminar-sede-dialog/eliminar-sede-dialog.component';
+import { NotificacionService } from 'src/app/util/notificacion.service';
 
 @Component({
   selector: 'app-sede',
@@ -29,11 +30,14 @@ export class SedeComponent implements OnInit {
 
   constructor(
     private dialog : MatDialog,
-    public sedeservicio : SedeService
+    public sedeservicio : SedeService,
+    private notificacion : NotificacionService,
   ) { }
 
   ngOnInit(): void {
 
+    this.cargarVariablesReactiva();
+    
      /*traduce componetes de la tabla*/
      this.paginator._intl.itemsPerPageLabel= 'Sedes por Página';
      this.paginator._intl.firstPageLabel='Primera Página';
@@ -108,6 +112,21 @@ export class SedeComponent implements OnInit {
   refrescarTabla(){
     
     this.paginator._changePageSize(this.paginator.pageSize);
+  }
+
+
+  
+  cargarVariablesReactiva() {
+  
+    /*MUESTRA MENSAJE*/
+    this.sedeservicio.mensajeCambio.subscribe(data => {
+
+      this.notificacion.mostrarNotificacion(data,'OK','exito');
+    }),(error : any) =>{
+
+      this.notificacion.mostrarNotificacion(error,'OK','error');
+    }; 
+
   }
 
 }

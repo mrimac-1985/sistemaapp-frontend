@@ -26,13 +26,19 @@ export class RolService {
     return this.http.get<Rol>(`${this.url}/${id}`);
   }
 
-  registrar(rol: Rol) {
-    return this.http.post(this.url, rol);
+  registrar(rol : Rol) {
+    return this.http.post<any>(this.url+'/insertarRol', rol);
   }
+  // registrar(rol: Rol) {
+  //   return this.http.post(this.url, rol);
+  // }
 
-  modificar(rol: Rol) {
-    return this.http.put(this.url, rol);
+  modificar(rol : Rol) {
+    return this.http.post<any>(this.url+'/actualizarol', rol);
   }
+  // modificar(rol: Rol) {
+  //   return this.http.put(this.url, rol);
+  // }
 
   eliminar(id: number) {
     return this.http.delete(`${this.url}/${id}`);

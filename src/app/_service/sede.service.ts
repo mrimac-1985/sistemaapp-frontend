@@ -20,7 +20,7 @@ export class SedeService {
   constructor(private http: HttpClient) { }
 
   listar(){
-    return this.http.get<Sede[]>(this.url);
+    return this.http.get<any>(this.url+'/listarsede');
   }
 
   listarPorId(id: number) {
@@ -28,13 +28,13 @@ export class SedeService {
   }
 
   registrar(sede: Sede) {
-    return this.http.post(this.url, sede);
+    return this.http.post<any>(this.url+'/insertarsede', sede);
   }
 
   modificar(sede: Sede) {
-    return this.http.put(this.url, sede);
+    return this.http.post<any>(this.url+'/actualizarsede', sede);
   }
-
+ 
   eliminar(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }

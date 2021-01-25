@@ -1,3 +1,4 @@
+import { PerfilService } from './../../../_service/perfil.service'
 import { Perfil } from './../../../_model/perfil'
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -18,6 +19,8 @@ export class PerfilDialogComponent implements OnInit {
 
   formperfil : FormGroup;
 
+  perfildb : Perfil;
+
   /*VARIABLES DE VALIDACION */
   val_snombre : string ;
   val_nsesionusuario : string;
@@ -28,6 +31,7 @@ export class PerfilDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<PerfilDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data_dialog: Perfil,
     private formBuilder: FormBuilder,
+    public perfilservice : PerfilService,
     public _validator: ValidatorService
   ) { }
 
@@ -58,11 +62,44 @@ export class PerfilDialogComponent implements OnInit {
   }
 
   operar(){
+    this.perfildb = new Perfil();
+
+    this.perfildb.nidperfil = this.formperfil.value['nidperfil'];
+    this.perfildb.snombreperfil = this.formperfil.value['snombreperfil'];
+    this.perfildb.nsesionesporusuario = this.formperfil.value['nsesionesporusuario'];
+    this.perfildb.ntiempoconexionminuto = this.formperfil.value['ntiempoconexion'];
+    this.perfildb.ntiempovidapasworddia = this.formperfil.value['ntiempopasword'];
+    this.perfildb.nidsesion = Number(sessionStorage.getItem('idsesion'));
 
     if (this.formperfil.valid) {
       /* OPERAR*/
+      if (this.perfildb.nidperfil!= null){
+        //modificas
+
+        this.perfilservice
+          .modificar(this.perfildb)
+          .subscribe((RespuestaBase) => {
+            this.perfilservice.mensajeCambio.next(RespuestaBase.mensaje);
+          });
+
+        this.LimpiarForm();
+        this.dialogRef.close();
+      }else{
+ 
+        //registras 
+        this.perfilservice.registrar(this.perfildb).subscribe((RespuestaBase) => {
+        this.perfilservice.mensajeCambio.next(RespuestaBase.mensaje);
+       });
+ 
+       this.LimpiarForm();
+         this.dialogRef.close();
+     }
     }
 
+  }
+
+  LimpiarForm() {
+    this.formperfil.reset();
   }
 
   get snombre() { 
@@ -78,6 +115,6 @@ export class PerfilDialogComponent implements OnInit {
   }
 
   get ntiempopasword() { 
-    return this.val_ntiempopasword = this._validator?.isValid('ntiempopaswordc',this.formperfil);
+    return this.val_ntiempopasword = this._validator?.isValid('ntiempopasword',this.formperfil);
   }
 }

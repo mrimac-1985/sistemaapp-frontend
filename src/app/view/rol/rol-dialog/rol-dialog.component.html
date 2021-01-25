@@ -39,9 +39,13 @@
         <div class="tp-container" fxFlexOrder="1"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">                           
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Observación:</mat-label>
-                <textarea matInput  maxlength ="100"></textarea>
+                <textarea matInput formControlName="sobservacion" maxlength ="100"></textarea>
                 <mat-icon matSuffix style="font-size: 1.5em">text_format</mat-icon>
-               
+                <div  *ngIf="observacion">
+                    <span style="color: #ff002b;">
+                        {{val_sobservacion}}
+                    </span>
+                </div>
             </mat-form-field>                    
         </div>
 

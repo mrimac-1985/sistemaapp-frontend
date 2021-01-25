@@ -24,19 +24,23 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline" >
-                <mat-label style="font-size:18px">Id Sede:</mat-label>
-                <input  matInput  formControlName="sede"  /> 
-                    <mat-icon matSuffix style="font-size: 1.5em">format_list_numbered_rtl</mat-icon>
+                <mat-label style="font-size:18px">Sede:</mat-label>
+                <mat-select   formControlName ='sede' required>
+                    <mat-option *ngFor="let v of sedeCombo" [value]="v.nidsede">
+                      {{v.snombre}}
+                    </mat-option>
+                </mat-select>
                     <div  *ngIf="sede">
                         <span style="color: #ff002b;">
                             {{val_sede}}
                         </span>
-                    </div>
+                    </div>  
+
             </mat-form-field>
 
         </div>
 
-        <div class="tp-container" fxFlexOrder="1"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
+        <!-- <div class="tp-container" fxFlexOrder="1"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
 
             <mat-form-field appearance="outline" >
                 <mat-label style="font-size:18px">Id Sesion:</mat-label>
@@ -49,14 +53,18 @@
                     </div>
             </mat-form-field>
 
-        </div>
+        </div> -->
 
         <div class="tp-container" fxFlexOrder="1"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">                           
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Observación:</mat-label>
-                <textarea matInput  maxlength ="100"></textarea>
+                <textarea matInput formControlName="sobservacion" maxlength ="200"></textarea>                
                 <mat-icon matSuffix style="font-size: 1.5em">text_format</mat-icon>
-               
+                <div  *ngIf="observacion">
+                    <span style="color: #ff002b;">
+                        {{val_observacion}}
+                    </span>
+                </div>
             </mat-form-field>                    
         </div>
     </mat-dialog-content>
