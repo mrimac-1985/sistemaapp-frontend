@@ -28,11 +28,11 @@ export class PerfilService {
   }
 
   registrar(perfil: Perfil) {
-    return this.http.post(this.url, perfil);
+    return this.http.post<any>(this.url+'/insertarperfil', perfil);
   }
 
   modificar(perfil: Perfil) {
-    return this.http.put(this.url, perfil);
+    return this.http.post<any>(this.url+'/actualizarperfil', perfil);
   }
 
   eliminar(id: number) {

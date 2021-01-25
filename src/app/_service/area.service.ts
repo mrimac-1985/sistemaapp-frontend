@@ -26,12 +26,18 @@ export class AreaService {
     return this.http.get<Area>(`${this.url}/${id}`);
   }
 
+  // registrar(area : Area) {
+  //   return this.http.post(this.url, area);
+  // }
   registrar(area : Area) {
-    return this.http.post(this.url, area);
+    return this.http.post<any>(this.url+'/insertararea', area);
   }
 
+  // modificar(area : Area) {
+  //   return this.http.put(this.url, area);
+  // }
   modificar(area : Area) {
-    return this.http.put(this.url, area);
+    return this.http.post<any>(this.url+'/actualizararea', area);
   }
 
   eliminar(id: number) {

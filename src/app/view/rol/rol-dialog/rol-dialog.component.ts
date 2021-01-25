@@ -1,3 +1,4 @@
+import { RolService } from './../../../_service/rol.service'
 import { ValidatorService } from './../../../util/ValidatorService'
 import { Rol } from './../../../_model/rol'
 import { Component, Inject, OnInit } from '@angular/core';
@@ -18,6 +19,8 @@ export class RolDialogComponent implements OnInit {
 
   formrol : FormGroup;
 
+  roldb : Rol;
+
   /*VARIABLES DE VALIDACION */
   val_snombrerol : string ;
   val_siglas : string;
@@ -27,6 +30,7 @@ export class RolDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<RolDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data_dialog: Rol,
     private formBuilder: FormBuilder,
+    public rolservice : RolService,
     public _validator: ValidatorService
   ) { }
 
@@ -45,7 +49,8 @@ export class RolDialogComponent implements OnInit {
     this.formrol = this.formBuilder.group({
       nidrol :  new FormControl(this.rol.nidrol),
       snombrerol :  new FormControl(this.rol.snombrerol, [Validators.required, Validators.minLength(8),Validators.maxLength(50)]),
-      siglas : new FormControl(this.rol.siglas, [Validators.required, Validators.minLength(3),Validators.maxLength(10)])
+      siglas : new FormControl(this.rol.siglas, [Validators.required, Validators.minLength(3),Validators.maxLength(10)]),
+      sobservacion : new FormControl(this.rol.sobservacion)
     });
   }
 
@@ -54,12 +59,45 @@ export class RolDialogComponent implements OnInit {
   }
 
   operar(){
+    this.roldb = new Rol();
 
+    this.roldb.nidrol = this.formrol.value['nidrol'];
+    this.roldb.snombrerol = this.formrol.value['snombrerol'];
+    this.roldb.siglas = this.formrol.value['siglas'];
+    this.roldb.sobservacion = this.formrol.value['sobservacion'];
+    this.roldb.nidsesion = Number(sessionStorage.getItem('idsesion'));
 
     if (this.formrol.valid) {
       /* OPERAR*/
+      if (this.roldb.nidrol!= null){
+        //modificas
+
+        this.rolservice
+          .modificar(this.roldb)
+          .subscribe((RespuestaBase) => {
+            this.rolservice.mensajeCambio.next(RespuestaBase.mensaje);
+          });
+
+        this.LimpiarForm();
+        this.dialogRef.close();
+      }else{
+ 
+        //registras 
+        this.rolservice.registrar(this.roldb).subscribe((RespuestaBase) => {
+        this.rolservice.mensajeCambio.next(RespuestaBase.mensaje);
+       });
+ 
+       this.LimpiarForm();
+         this.dialogRef.close();
+     }
+    }else {
+      console.log('formulario no valido');
     }
 
+  }
+
+  LimpiarForm() {
+    this.formrol.reset();
   }
 
   get snombrerol() { 
@@ -69,4 +107,9 @@ export class RolDialogComponent implements OnInit {
   get siglas() { 
     return this.val_siglas = this._validator?.isValid('siglas',this.formrol); 
   }
+
+  get observacion() { 
+    return this.val_sobservacion = this._validator?.isValid('sobservacion',this.formrol); 
+  }
+
 }

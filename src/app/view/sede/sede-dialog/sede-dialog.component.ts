@@ -1,3 +1,4 @@
+import { SedeService } from './../../../_service/sede.service'
 import { UbigeoService } from './../../../_service/ubigeo.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Component, Inject, OnInit } from '@angular/core';
@@ -24,6 +25,7 @@ export class SedeDialogComponent implements OnInit {
 
   formsede : FormGroup;
 
+  sededb : Sede;
 
   /*VARIABLES DE VALIDACION */
   val_snombre : string ;
@@ -38,6 +40,7 @@ export class SedeDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data_dialog: Sede,
     private formBuilder: FormBuilder,
     public _validator: ValidatorService,
+    public sedeservice : SedeService ,
     public ubigeoservice: UbigeoService
   ) { }
 
@@ -59,10 +62,10 @@ export class SedeDialogComponent implements OnInit {
       nidsede :  new FormControl(this.sede.nidsede),
       snombre :  new FormControl(this.sede.snombre, [Validators.required, Validators.minLength(8),Validators.maxLength(50)]),
       sdireccion : new FormControl(this.sede.sdireccion, [Validators.required, Validators.minLength(8),Validators.maxLength(50)]),
-      departamento : new FormControl('', [Validators.required]),
-      provincia : new FormControl('', [Validators.required]),
-      distrito : new FormControl('', [Validators.required]),
-      observacion : new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(50)])
+      departamento : new FormControl(''),
+      provincia : new FormControl(''),
+      distrito : new FormControl(this.sede.subigeo, [Validators.required]),
+      observacion : new FormControl('' )
 
     });
 
@@ -99,12 +102,46 @@ export class SedeDialogComponent implements OnInit {
 
   operar(){
 
+    this.sededb = new Sede();
+
+    this.sededb.nidsede = this.formsede.value['nidsede'];
+    this.sededb.snombre = this.formsede.value['snombre'];
+    this.sededb.sdireccion = this.formsede.value['sdireccion'];
+    this.sededb.subigeo = this.formsede.value['distrito'];
+    
 
     if (this.formsede.valid) {
       /* OPERAR*/
+      
+      if (this.sededb.nidsede!= null){
+        //modificas
+        this.sedeservice
+          .modificar(this.sededb)
+          .subscribe((RespuestaBase) => {
+            this.sedeservice.mensajeCambio.next(RespuestaBase.mensaje);
+          });
+
+        this.LimpiarForm();
+        this.dialogRef.close();
+      }else{
+       //registras 
+       this.sedeservice.registrar(this.sededb).subscribe((RespuestaBase) => {
+       this.sedeservice.mensajeCambio.next(RespuestaBase.mensaje);
+      });
+
+      this.LimpiarForm();
+        this.dialogRef.close();
     }
+    }else {
+      console.log('formulario no valido');
+    }
+      
+  
 
+  }
 
+  LimpiarForm() {
+    this.formsede.reset();
   }
 
   select(plan: string)

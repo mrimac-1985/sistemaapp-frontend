@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { EliminarRolDialogComponent } from './eliminar-rol-dialog/eliminar-rol-dialog.component';
+import { NotificacionService } from 'src/app/util/notificacion.service';
 
 @Component({
   selector: 'app-rol',
@@ -30,11 +31,13 @@ export class RolComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    public roleservicio : RolService    
+    public roleservicio : RolService,
+    private notificacion : NotificacionService,   
   ) { }
 
   ngOnInit(): void {
-
+    
+    this.cargarVariablesReactiva();
 
      /*traduce componetes de la tabla*/
      this.paginator._intl.itemsPerPageLabel= 'Roles por Página';
@@ -128,7 +131,18 @@ export class RolComponent implements OnInit {
     this.paginator._changePageSize(this.paginator.pageSize);
   }
  
+  cargarVariablesReactiva() {
+  
+    /*MUESTRA MENSAJE*/
+    this.roleservicio.mensajeCambio.subscribe(data => {
 
+      this.notificacion.mostrarNotificacion(data,'OK','exito');
+    }),(error : any) =>{
+
+      this.notificacion.mostrarNotificacion(error,'OK','error');
+    }; 
+
+  }
 }
 
 

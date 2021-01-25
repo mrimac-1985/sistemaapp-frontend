@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { AreaDialogComponent } from './area-dialog/area-dialog.component';
 import { EliminarAreaDialogComponent } from './eliminar-area-dialog/eliminar-area-dialog.component';
+import { NotificacionService } from 'src/app/util/notificacion.service';
 
 @Component({
   selector: 'app-area',
@@ -29,10 +30,13 @@ export class AreaComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    public areaservicio : AreaService
+    public areaservicio : AreaService,
+    private notificacion : NotificacionService,
   ) { }
 
   ngOnInit(): void {
+
+    this.cargarVariablesReactiva();
 
     /*traduce componetes de la tabla*/
     this.paginator._intl.itemsPerPageLabel= 'Areas por Página';
@@ -112,5 +116,18 @@ export class AreaComponent implements OnInit {
   refrescarTabla(){
     
     this.paginator._changePageSize(this.paginator.pageSize);
+  }
+
+  cargarVariablesReactiva() {
+  
+    /*MUESTRA MENSAJE*/
+    this.areaservicio.mensajeCambio.subscribe(data => {
+
+      this.notificacion.mostrarNotificacion(data,'OK','exito');
+    }),(error : any) =>{
+
+      this.notificacion.mostrarNotificacion(error,'OK','error');
+    }; 
+
   }
 }
