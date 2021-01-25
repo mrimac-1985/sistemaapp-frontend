@@ -9,12 +9,11 @@ import { Router } from '@angular/router';
 import { DialogCerrarsesionComponent } from './view/dialog-cerrarsesion/dialog-cerrarsesion.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginService } from './_service/login.service';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+
 import { Configuracion } from './_model/configuracion';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SesionService } from './_service/sesion.service';
-
+import { HostListener } from '@angular/core';
  
 
 @Component({
@@ -23,7 +22,9 @@ import { SesionService } from './_service/sesion.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    
+
+    @HostListener('window:beforeunload', ['$event'])
+
   /*VARIABLE DEL MENU*/
   menus: Menu[];
   configuracion : Configuracion;
@@ -66,13 +67,41 @@ export class AppComponent implements OnInit {
     public loginService: LoginService,
     private sanitization: DomSanitizer,
     private sesionservicio: SesionService
-  ) {  
+  ) {  }
 
+
+  onWindowClose(event: any): void {
+    // Do something
+    this.dialog
+    .open(DialogCerrarsesionComponent, {
+      width: "250px",
+      data: "x",
+    })
+    .afterClosed()
+    .subscribe((confirmado: Boolean) => {
+      if (confirmado) {     
+        this.loginService.cerrarSesion( Number(sessionStorage.getItem("idsesion")));  
+        this.router.navigate(["login"]);
+      }
+    });
     
-  }
-  
+     event.preventDefault();
+     event.returnValue = false;
 
-  
+  }
+
+  // unloadHandler(_event: any) {
+    
+  //   this.sesionservicio.cerrarSesion(Number(sessionStorage.getItem('idsesion'))).subscribe();
+  //   alert(`I"m leaving the app!`);
+  // }
+
+  // beforeUnloadHander(_event: any) {
+  //   // ..
+  //   this.sesionservicio.cerrarSesion(Number(sessionStorage.getItem('idsesion'))).subscribe();
+  //   alert(`I"m leaving the app!`);
+
+  //   }
 
   ngOnInit() {
 
@@ -111,6 +140,9 @@ export class AppComponent implements OnInit {
   
   ngOnDestroy(): void{
      
+     
+    alert(`I"m leaving the app!`);
+ 
     this.sesionservicio.cerrarSesion(Number(sessionStorage.getItem('idsesion'))).subscribe();
   }
 

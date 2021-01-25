@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit , OnDestroy{
 
   ngOnInit(): void {
 
-
+    sessionStorage.clear();
   
     this.formUsuario = this.formBuilder.group({
       usuario:  new FormControl('MAX', [Validators.required] ) , 
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit , OnDestroy{
   if(this.formUsuario.valid){
 
     
- 
+
   
       this.v_usaurio=this.formUsuario.value['usuario'];; 
   
