@@ -4,11 +4,14 @@ import { Rol } from './../_model/rol'
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { RolProcedimiento } from '../_model/rolprocedimiento';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RolService {
+
+
 
 
   rolCambio = new Subject<Rol[]>();
@@ -50,6 +53,14 @@ export class RolService {
   
   listarRolUsuario(nidusuario: number) {
     return this.http.get<any>(`${this.url}/listarRolUsuario/${nidusuario}`);
+  }
+
+  registrarrolprocedimiento(rolprocedimiento: RolProcedimiento) {
+    return this.http.post<any>(this.url+'/registrarrolprocedimiento', rolprocedimiento); //&sort=nombre
+  }
+ 
+  registrarrolprocedimientolista(listarolprocedimiento: RolProcedimiento[]) {
+    return this.http.post<any>(this.url+'/registrarrolprocedimientolista', listarolprocedimiento); //&sort=nombre
   }
 
 }

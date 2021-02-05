@@ -47,27 +47,39 @@ export class SedeDialogComponent implements OnInit {
   ngOnInit(): void {
 
     this.listarDepartamento();
- 
+
+
     this.sede = new Sede();
 
     if(this.data_dialog.nidsede != null ){
       this.sede = this.data_dialog
       this.nombreboton = "Actualizar";
+
+      this.listarProvincia(this.sede.subigeo);
+      this.listarDistrito(this.sede.subigeo.substr(0,6) + '');
+  
     }else {
       this.nombreboton = "Registrar";
     }
 
+
+    /*CARGA COMBOS DISTRITO */
+
+
+
+
     /*INICIALIZANDO FORMULARIO */
     this.formsede = this.formBuilder.group({
       nidsede :  new FormControl(this.sede.nidsede),
-      snombre :  new FormControl(this.sede.snombre, [Validators.required, Validators.minLength(8),Validators.maxLength(50)]),
+      snombre :  new FormControl(this.sede.snombre, [Validators.required, Validators.minLength(5),Validators.maxLength(50)]),
       sdireccion : new FormControl(this.sede.sdireccion, [Validators.required, Validators.minLength(8),Validators.maxLength(50)]),
-      departamento : new FormControl(''),
-      provincia : new FormControl(''),
+      departamento : new FormControl(this.sede.subigeo== null ? '' :this.sede.subigeo.substr(0,2) + '0000'),
+      provincia : new FormControl(this.sede.subigeo== null ? '' :this.sede.subigeo.substr(0,4) + '00'),
       distrito : new FormControl(this.sede.subigeo, [Validators.required]),
       observacion : new FormControl('' )
 
     });
+
 
   }
 
@@ -79,15 +91,19 @@ export class SedeDialogComponent implements OnInit {
   }
 
   listarProvincia(iddepartamento : string) { 
+ 
     this.provinciacombo = [];
     this.distritocombo = [];
 
     this.ubigeoservice.listarProvincia(iddepartamento).subscribe(respuestabase=>{
       this.provinciacombo = respuestabase.data;
+      console.log(this.provinciacombo );
+      
     });
   }
 
   listarDistrito(idprivincia : string) {
+      
     this.distritocombo = [];
     this.ubigeoservice.listarDistrito(idprivincia).subscribe(respuestabase=>{
       this.distritocombo = respuestabase.data;
@@ -149,6 +165,7 @@ export class SedeDialogComponent implements OnInit {
       console.log('COMBO->'+plan)
   }
 
+  
   
 
   get snombre() { 

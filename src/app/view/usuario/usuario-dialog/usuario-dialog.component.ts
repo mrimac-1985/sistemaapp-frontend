@@ -119,6 +119,7 @@ export class UsuarioDialogComponent implements OnInit {
  {}
   
     this.formOperador = this.formBuilder.group({
+
       nidoperador:  new FormControl(this.operadorDto.operador.nidoperador ) , 
       sidtipodoc:  new FormControl(this.operadorDto.operador.sidtipodoc, Validators.required) , 
       snumdocu:  new FormControl(this.operadorDto.operador.snumdocu, [Validators.required , Validators.minLength(8),Validators.maxLength(15)]) , 
@@ -131,11 +132,15 @@ export class UsuarioDialogComponent implements OnInit {
       sgenero:  new FormControl(this.operadorDto.operador.sgenero, Validators.required) , 
       sdireccion:  new FormControl(this.operadorDto.operador.sdireccion, Validators.required) , 
       sobservacion:  new FormControl(this.operadorDto.operador.sobservacion, ) , 
+
+      
       slogin:  new FormControl(this.operadorDto.operador.usuario.slogin, Validators.required) , 
       spassword:  new FormControl(this.operadorDto.operador.usuario.spassword, Validators.required) , 
       nidarea:  new FormControl(this.operadorDto.nidarea, Validators.required) , 
       nidperfil:  new FormControl(this.operadorDto.nidperfil, Validators.required) , 
       nidRol:  new FormControl(this.operadorDto.nidrol, Validators.required) 
+
+
     });
 
     this.consultarImagen();

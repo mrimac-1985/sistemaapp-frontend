@@ -2,7 +2,7 @@
 
     <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;margin-top: 10px;" >
 
-        <div class="divclassmenu"  >
+        <div class="divclassmenu" >
             <div style="margin-top: 10px;" class="tp-container" xFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" >
                 <h2 class="app-name">  <mat-icon>settings</mat-icon> Configuración / <mat-icon>people</mat-icon> Usuarios </h2>
                 <span class="spacer"></span>
@@ -12,7 +12,7 @@
                 <button mat-button fxShow.lt-md="false" fxShow.gt-sm="true" matTooltip="Reporte Excel" (click)="genereReporte('xlsx')">
                     <img src="../../../assets/iconos/icono_excel.png"   height="35px" alt="x" />
                 </button>
-                <button mat-button fxShow.lt-md="false" fxShow.gt-sm="true"   matTooltip="Reporte PDF" (click)="genereReporte('pdf')">
+                <button   [disabled]="!btnGeberarReporteUsuario"  mat-button fxShow.lt-md="false" fxShow.gt-sm="true"   matTooltip="Reporte PDF" (click)="genereReporte('pdf')">
                     <img src="../../../assets/iconos/icono_pdf.png" height="35px" alt="x" />
                 </button>
             </div>
@@ -32,7 +32,7 @@
                     <!-- <h2 class="app-name" style="width: 100%;" >Lista de Usuarios:</h2> -->
                 <div class="example-full-width" style="width: 100%;" >
                          
-                    <button style="height: 45px;" mat-raised-button color="primary" (click)="openDialog()"><mat-icon>person_add</mat-icon>  Nuevo   </button>                                            
+                    <button  [disabled]="!btnNuevoUsuario" style="height: 45px;" mat-raised-button color="primary" (click)="openDialog()"><mat-icon>add</mat-icon>  AGREGAR   </button>                                            
             
                 </div>  
                 
@@ -53,16 +53,16 @@
         
                     <ng-container matColumnDef="snombre">
                         <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Nombres </mat-header-cell>
-                        <mat-cell *matCellDef="let row" class="rowStilo"> {{row.operador.snombre}}</mat-cell>
+                        <mat-cell *matCellDef="let row" class="rowStilo"> {{row.operador.snombre}} {{row.operador.sapepaterno}} {{row.operador.sapematerno}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="slogin">
                         <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Login </mat-header-cell>
                         <mat-cell *matCellDef="let row" class="rowStilo"> {{row.operador.usuario.slogin}}</mat-cell>
                     </ng-container>
-                    <ng-container matColumnDef="spassword">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Contraseña </mat-header-cell>
-                        <mat-cell *matCellDef="let row" class="rowStilo"> {{row.operador.usuario.spassword}}</mat-cell>
+                    <ng-container matColumnDef="dfechareg">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Fecha Registro </mat-header-cell>
+                        <mat-cell *matCellDef="let row" class="rowStilo"> {{row.operador.dfechareg | date:'yyyy-MM-dd  hh:mm a'}}</mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="estado">
                         <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Estado </mat-header-cell>
@@ -73,13 +73,13 @@
                     <ng-container matColumnDef="acciones" >
                         <mat-header-cell fxFlex="10%" *matHeaderCellDef mat-sort-header class="headStiloAccion" >Acciones</mat-header-cell>
                         <mat-cell  fxFlex="10%" *matCellDef="let row;"  class="rowStiloAccion" >
-                            <button mat-icon-button color="primary" matTooltip="Editar"  (click)="openDialog(row)">
+                            <button  [disabled]="!btnModificarUsuario"  mat-icon-button color="primary" matTooltip="Editar"  (click)="openDialog(row)">
                                 <mat-icon>edit</mat-icon>
                             </button>
-                            <button mat-icon-button color="warn" matTooltip="Eliminar" (click)="elimiarUsuarioDialog(row)">
+                            <button  [disabled]="!btnEliminarUsuario"  mat-icon-button color="warn" matTooltip="Eliminar" (click)="elimiarUsuarioDialog(row)">
                                 <mat-icon>delete_outline</mat-icon>
                             </button>
-                            <button mat-icon-button color="basic" matTooltip="Activar" (click)="activarUsuarioDialog(row)">
+                            <button [disabled]="!btnReactivarUsuario"  mat-icon-button color="basic" matTooltip="Activar" (click)="activarUsuarioDialog(row)">
                                 <mat-icon>open_in_browser</mat-icon>
                             </button>
                         </mat-cell>

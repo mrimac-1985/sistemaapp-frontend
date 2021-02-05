@@ -46,6 +46,8 @@ import { EliminarAreaDialogComponent } from './view/area/eliminar-area-dialog/el
 
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { PermisoRolDialogComponent } from './view/rol/permiso-rol-dialog/permiso-rol-dialog.component';
+import { ActivarUsuDialogComponent } from './view/usuario/activar-usu-dialog/activar-usu-dialog.component';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -76,7 +78,9 @@ registerLocaleData(localeEs, 'es');
     PerfilDialogComponent,
     EliminarPerfilDialogComponent,
     AreaDialogComponent,
-    EliminarAreaDialogComponent
+    EliminarAreaDialogComponent,
+    PermisoRolDialogComponent,
+    ActivarUsuDialogComponent
   ],
   imports: [
     BrowserModule,

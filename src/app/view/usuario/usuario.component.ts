@@ -1,3 +1,7 @@
+import { Procedimiento } from './../../_model/procedimiento';
+import { MenuService } from 'src/app/_service/menu.service';
+import { RolMenuDTO } from './../../_model_dto/rolmenuDto';
+import { RolProcedimiento } from './../../_model/rolprocedimiento';
 import { ReporteService } from './../../util/reporte.service';
 import { NotificacionService } from './../../util/notificacion.service';
 import { EliminarDialogComponent } from './eliminar-dialog/eliminar-dialog.component';
@@ -17,6 +21,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Pageable } from 'src/app/_model/pageable';
+import { Observable, observable } from 'rxjs';
+import { ActivarUsuDialogComponent } from './activar-usu-dialog/activar-usu-dialog.component';
 
 
 @Component({
@@ -28,16 +34,27 @@ export class UsuarioComponent implements OnInit {
 
   public cantidad: number  = 0;
 
+  public rolmenudto : RolMenuDTO;
   public dataSource: MatTableDataSource<OperadorDto>;
  
   public mymodel :string;
  
-  formBuscar : FormGroup;
+  public procedimiento = new Array();
 
+  formBuscar : FormGroup;
+ 
 
   pagina: Pageable;
   
-  displayedColumns: string[] = ['nidoperador',  'snumdocu', 'snombre',  'slogin','spassword', 'estado', 'acciones'];
+  public btnNuevoUsuario : boolean ;
+  public btnModificarUsuario : boolean ;
+  public btnEliminarUsuario : boolean ;
+  public btnReactivarUsuario : boolean ;
+  public btnGeberarReporteUsuario : boolean ;
+
+  map = new Map();
+
+  displayedColumns: string[] = ['nidoperador',  'snumdocu', 'snombre',  'slogin','dfechareg', 'estado', 'acciones'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -48,7 +65,8 @@ export class UsuarioComponent implements OnInit {
     private snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
     private notificacion : NotificacionService,
-    private ReporteService : ReporteService
+    private ReporteService : ReporteService,
+    private menuservicio : MenuService
 
   ) { }
 
@@ -68,7 +86,41 @@ export class UsuarioComponent implements OnInit {
     this.listarOperadores(0, 10);
 
     this.cargarVariablesReactiva();
+ 
+    this.validarpermisos();
+
+  
+
   }
+
+
+
+  validarpermisos() { 
+
+        /*id del menu */
+        let idmenu : number = 3; // menu usuarios
+      
+        this.rolmenudto = new RolMenuDTO();        
+        this.rolmenudto.nidrol = Number(sessionStorage.getItem("rolusuario"));
+        this.rolmenudto.nidmenu = idmenu
+     
+        this.menuservicio.validarpermisosrolmenu(this.rolmenudto).subscribe( respuestabase   => 
+        { 
+          this.procedimiento = respuestabase.data;    
+ 
+          this.procedimiento.forEach(row => {
+                       
+            this.map.set(row.setiqueta, row.bactivo);
+          });    
+          this.btnNuevoUsuario = Boolean(this.map.get("REG_USU")) ;
+          this.btnModificarUsuario= Boolean(this.map.get("ACT_USU")) ;
+          this.btnEliminarUsuario = Boolean(this.map.get("ELI_USU")) ;
+          this.btnReactivarUsuario = Boolean(this.map.get("ACTIV_USU")) ;                    
+          this.btnGeberarReporteUsuario= Boolean(this.map.get("REPT_USU")) ;                    
+        } ); 
+ 
+  }
+
 
   listarOperadores(page: number , side: number) {
   
@@ -149,6 +201,16 @@ export class UsuarioComponent implements OnInit {
 
   activarUsuarioDialog(operador?: OperadorDto) {
      
+    let ope = operador != null ? operador : new OperadorDto();
+    this.dialog.open(ActivarUsuDialogComponent, {
+      width: '350px',
+      data: ope
+    })
+    .afterClosed().subscribe( resultado => {
+  
+      this.refrescarTabla();       
+    }
+    );
   }
 
   refrescarTabla(){

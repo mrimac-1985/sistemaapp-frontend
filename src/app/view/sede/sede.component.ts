@@ -1,3 +1,4 @@
+import { SedeDto } from './../../_model_dto/sedeDto';
 import { MatDialog } from '@angular/material/dialog'
 import { SedeService } from './../../_service/sede.service'
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -17,11 +18,11 @@ import { NotificacionService } from 'src/app/util/notificacion.service';
 })
 export class SedeComponent implements OnInit {
 
-  public dataSource: MatTableDataSource<Sede>;
+  public dataSource: MatTableDataSource<SedeDto>;
   public cantidad: number  = 0;
 
   pagina: Pageable;
-  listaSedes : Sede[];
+  listaSedes : SedeDto[];
 
 
   displayedColumns: string[] = ['nidsede',  'snombre', 'sdireccion', 'subigeo', 'dfechareg', 'acciones'];
@@ -80,8 +81,8 @@ export class SedeComponent implements OnInit {
 
   }
 
-  openDialog(sede?: Sede) {
-    let sededata = sede != null ? sede : new Sede();
+  openDialog(sede?: SedeDto) {
+    let sededata = sede != null ? sede : new SedeDto();
     this.dialog.open(SedeDialogComponent, {
       width: '700px',
       data: sededata
@@ -92,8 +93,8 @@ export class SedeComponent implements OnInit {
     );
   }
 
-  eliminarSedeDialog(sede?: Sede) {
-    let sededata = sede != null ? sede : new Sede();
+  eliminarSedeDialog(sede?: SedeDto) {
+    let sededata = sede != null ? sede : new SedeDto();
     this.dialog.open(EliminarSedeDialogComponent, {
       width: '800px',
       height: '400px',
@@ -105,7 +106,7 @@ export class SedeComponent implements OnInit {
     );
   }
 
-  activarSedeDialog(sede?: Sede) {
+  activarSedeDialog(sede?: SedeDto) {
  
   }
 

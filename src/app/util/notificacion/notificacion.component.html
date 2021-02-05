@@ -1,10 +1,15 @@
-<div>
-    {{data.type | titlecase}}
+<div >
+   <h2>{{data.type | titlecase}}</h2>  
 </div>
 
 <div>
-    {{data.message}}
-</div>
 <div>
-    <button mat-flat-button (click)="snackBarRef.dismiss()" >{{data.buttonText}}</button>
+    <img src="../../../assets/iconos/ok.png" height="50px">
+    <h4>{{data.message}}</h4>
+</div>    
+</div>
+<div style="text-align: center;">
+    <button mat-flat-button (click)="snackBarRef.dismiss()" >
+        {{data.buttonText}}
+    </button>
 </div>

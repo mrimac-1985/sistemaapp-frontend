@@ -81,6 +81,9 @@ export class LoginComponent implements OnInit , OnDestroy{
               this.usuarioServiec.consutlarusuariosesion(this.v_usaurio).subscribe(respuestabase =>{
               
                     this.usuarioServiec.usuariosesion.next(respuestabase.data[0]);
+
+                    /*GUARDA ROL DEL USUARIO */
+                    sessionStorage.setItem("rolusuario",respuestabase.data[0].nidrol);
               });
 
 

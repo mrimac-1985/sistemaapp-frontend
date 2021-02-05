@@ -3,5 +3,5 @@ export class UsuarioSesion{
     scorreo : string ;
     snombrerol:  string ;
     ximagen :  any; 
-
+    nidrol : number;
 }

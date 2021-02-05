@@ -1,59 +1,84 @@
-<p>rol works!</p>
+<div id="main-container" >
+
+    <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;margin-top: 10px;" >
 
 
-<div class="example-full-width" style="width: 100%;" >
+
+        <div class="divclassmenu"  >
+            <div style="margin-top: 10px;" class="tp-container" xFlexOrder="2"  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" >
+                <h2 class="app-name">  <mat-icon>settings</mat-icon> Configuración / <mat-icon>people</mat-icon> Roles </h2>
+                <span class="spacer"></span>
+               
+            </div>
+        </div>
+
+
+        <div class="example-full-width" style="width: 100%;" >
                          
-    <button style="height: 45px;" mat-raised-button color="primary" (click)="openDialog()"><mat-icon>person_add</mat-icon>  Nuevo   </button>                                            
-
-</div>  
-
-
-<div  class="divclasstable" >
-    <mat-table [dataSource]="dataSource" matSort >
-                          
-        <ng-container matColumnDef="nidrol" >
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo" > Id Rol</mat-header-cell>
-            <mat-cell fxFlex="10%"  *matCellDef="let rol" class="rowStilo"> {{rol.nidrol}}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="snombrerol">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Nombre Rol<a href=""></a> </mat-header-cell>
-            <mat-cell *matCellDef="let rol" class="rowStilo"> {{rol.snombrerol}}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="siglas">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Siglas </mat-header-cell>
-            <mat-cell *matCellDef="let rol" class="rowStilo"> {{rol.siglas}}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="dfechareg">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Fecha Creación </mat-header-cell>
-            <mat-cell *matCellDef="let rol" class="rowStilo"> {{rol.dfechareg}}</mat-cell>
-        </ng-container>
+            <button style="height: 45px;" mat-raised-button color="primary"  (click)="openDialog()"><mat-icon>person_add</mat-icon>  Nuevo   </button>                                            
         
+        </div>  
+        
+        
+        <div  class="divclasstable" >
+            <mat-table [dataSource]="dataSource" matSort >
+                                  
+                <ng-container matColumnDef="nidrol" >
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo" > Id Rol</mat-header-cell>
+                    <mat-cell fxFlex="10%"  *matCellDef="let rol" class="rowStilo"> {{rol.nidrol}}</mat-cell>
+                </ng-container>
+        
+                <ng-container matColumnDef="snombrerol">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Nombre Rol<a href=""></a> </mat-header-cell>
+                    <mat-cell *matCellDef="let rol" class="rowStilo"> {{rol.snombrerol}}</mat-cell>
+                </ng-container>
+        
+                <ng-container matColumnDef="siglas">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Siglas </mat-header-cell>
+                    <mat-cell *matCellDef="let rol" class="rowStilo"> {{rol.siglas}}</mat-cell>
+                </ng-container>
+        
+                <ng-container matColumnDef="dfechareg">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Fecha Creación </mat-header-cell>
+                    <mat-cell *matCellDef="let rol" class="rowStilo"> {{rol.dfechareg | date:'yyyy-MM-dd  hh:mm a'}}</mat-cell>
+                </ng-container>
+                
+        
+                <ng-container matColumnDef="acciones" >
+                    <mat-header-cell fxFlex="15%" *matHeaderCellDef mat-sort-header class="headStiloAccion" >Acciones</mat-header-cell>
+                    <mat-cell  fxFlex="15%" *matCellDef="let row;"  class="rowStiloAccion" >
+                        <button mat-icon-button color="primary" matTooltip="Editar"  (click)="openDialog(row)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" matTooltip="Permisos"  (click)="openDialogPermisos(row)">
+                            <mat-icon>note_add</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" matTooltip="Eliminar" (click)="elimiarRolDialog(row)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                        <button mat-icon-button color="basic" matTooltip="Activar" (click)="activarRolDialog(row)">
+                            <mat-icon>open_in_browser</mat-icon>
+                        </button>
+                    </mat-cell>
+               </ng-container>
+               
+            
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+             
+            <mat-paginator   [pageSize]="10"   [pageSizeOptions]="[5, 10, 25, 100]"  showFirstLastButtons  [length]="cantidad" (page)="mostrarMas($event)" class="headStilo" >
+            </mat-paginator>
+          
+        
+        </div>
 
-        <ng-container matColumnDef="acciones" >
-            <mat-header-cell fxFlex="10%" *matHeaderCellDef mat-sort-header class="headStiloAccion" >Acciones</mat-header-cell>
-            <mat-cell  fxFlex="10%" *matCellDef="let row;"  class="rowStiloAccion" >
-                <button mat-icon-button color="primary" matTooltip="Editar"  (click)="openDialog(row)">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button color="warn" matTooltip="Eliminar" (click)="elimiarRolDialog(row)">
-                    <mat-icon>delete_outline</mat-icon>
-                </button>
-                <button mat-icon-button color="basic" matTooltip="Activar" (click)="activarRolDialog(row)">
-                    <mat-icon>open_in_browser</mat-icon>
-                </button>
-            </mat-cell>
-       </ng-container>
+
+
+    </div>
        
-    
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-     
-    <mat-paginator   [pageSize]="10"   [pageSizeOptions]="[5, 10, 25, 100]"  showFirstLastButtons  [length]="cantidad" (page)="mostrarMas($event)" class="headStilo" >
-    </mat-paginator>
-  
-
 </div>
+
+
+
+

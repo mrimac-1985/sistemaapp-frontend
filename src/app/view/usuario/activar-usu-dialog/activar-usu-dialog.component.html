@@ -1,0 +1,15 @@
+
+<div class="header"  fxFlexOrder="2"  fxLayoutGap="20px" >
+    Confirmación!!!
+</div>
+ <mat-dialog-content>
+     <p></p>
+     ¿Esta seguro de activar al Operador?
+     <h3 style="font-weight: bold;">  {{nombreOperador}}</h3>
+    <p></p>
+    
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="cerrarDialogo()">No</button>
+    <button mat-button (click)="activarOperador()" cdkFocusInitial>Sí</button>
+</mat-dialog-actions>

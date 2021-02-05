@@ -4,11 +4,13 @@ import { Menu } from '../_model/menu';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Pageable } from '../_model/pageable';
+import { RolMenuDTO } from '../_model_dto/rolmenuDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuService {
+
 
   url: string = `${environment.HOST}/menus`;   
 
@@ -26,6 +28,9 @@ export class MenuService {
     return this.http.post<any>(`${this.url}/menuusuario`, nombre);
   }
 
+  listarMenuSubmenu() {
+    return this.http.get<any>( this.url+'/listarmenusubmenu');
+  }
 
   listarMenu(p: number, s: number) {
    //return this.http.get<any>(`${this.url}/pageable?page=${p}&size=${s}`); //&sort=nombre
@@ -40,5 +45,14 @@ export class MenuService {
     });
     
   }
+  
+  consultapermisomenu(rolmenu: RolMenuDTO) {
+    return this.http.post<any>(this.url+'/consultapermisomenu', rolmenu);
+  }
+
+  validarpermisosrolmenu(rolmenudto: RolMenuDTO) {
+    return this.http.post<any>(this.url+'/validarpermisosrolmenu', rolmenudto);
+  }
+ 
 
 }

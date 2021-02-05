@@ -1,9 +1,20 @@
+import { MenuService } from 'src/app/_service/menu.service';
 import { RolService } from './../../../_service/rol.service'
 import { ValidatorService } from './../../../util/ValidatorService'
 import { Rol } from './../../../_model/rol'
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ThemePalette } from '@angular/material/core';
+import { Menu } from 'src/app/_model/menu';
+
+export interface Task {
+  name: string;
+  completed: boolean;
+  color: ThemePalette;
+  subtasks?: Task[];
+}
+
 
 @Component({
   selector: 'app-rol-dialog',
@@ -21,6 +32,8 @@ export class RolDialogComponent implements OnInit {
 
   roldb : Rol;
 
+  menusubmenu : Menu[];
+
   /*VARIABLES DE VALIDACION */
   val_snombrerol : string ;
   val_siglas : string;
@@ -31,7 +44,8 @@ export class RolDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data_dialog: Rol,
     private formBuilder: FormBuilder,
     public rolservice : RolService,
-    public _validator: ValidatorService
+    public _validator: ValidatorService,
+    public menuservice: MenuService
   ) { }
 
   ngOnInit(): void {
@@ -52,7 +66,9 @@ export class RolDialogComponent implements OnInit {
       siglas : new FormControl(this.rol.siglas, [Validators.required, Validators.minLength(3),Validators.maxLength(10)]),
       sobservacion : new FormControl(this.rol.sobservacion)
     });
+  
   }
+
 
   cancelar(): void {
     this.dialogRef.close();
@@ -97,9 +113,10 @@ export class RolDialogComponent implements OnInit {
   }
 
   LimpiarForm() {
-    this.formrol.reset();
-  }
+    this.formrol.reset();    
 
+  }
+ 
   get snombrerol() { 
     return this.val_snombrerol = this._validator?.isValid('snombrerol',this.formrol); 
   }
@@ -111,5 +128,7 @@ export class RolDialogComponent implements OnInit {
   get observacion() { 
     return this.val_sobservacion = this._validator?.isValid('sobservacion',this.formrol); 
   }
+
+ 
 
 }

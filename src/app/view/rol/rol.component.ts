@@ -1,3 +1,4 @@
+import { PermisoRolDialogComponent } from './permiso-rol-dialog/permiso-rol-dialog.component';
 
 import { RolDialogComponent } from './rol-dialog/rol-dialog.component'
 import { RolService } from './../../_service/rol.service'
@@ -95,7 +96,7 @@ export class RolComponent implements OnInit {
 
     let roldata = rol != null ? rol : new Rol();
     this.dialog.open(RolDialogComponent, {
-      width: '800px',
+      width: '500px',
       /*height: '400px',*/
       data: roldata
     })
@@ -106,6 +107,23 @@ export class RolComponent implements OnInit {
  
   } 
  
+  
+  openDialogPermisos(rol?: Rol) {
+
+    let roldata = rol != null ? rol : new Rol();
+    this.dialog.open(PermisoRolDialogComponent, {
+      width: '650px',
+      height: '800px',
+      data: roldata
+    })
+    .afterClosed().subscribe( resultado => {      
+      this.refrescarTabla();     
+    }
+    );
+ 
+  } 
+ 
+
   
   elimiarRolDialog(rol?: Rol) {
     let roldata = rol != null ? rol : new Rol();
