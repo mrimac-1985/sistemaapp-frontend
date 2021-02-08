@@ -6,7 +6,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Menu } from 'src/app/_model/menu';
 import { MenuService } from 'src/app/_service/menu.service';
-import { Task } from '../rol-dialog/rol-dialog.component';
+
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Rol } from 'src/app/_model/rol';

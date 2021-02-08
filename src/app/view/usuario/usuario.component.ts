@@ -51,6 +51,8 @@ export class UsuarioComponent implements OnInit {
   public btnEliminarUsuario : boolean ;
   public btnReactivarUsuario : boolean ;
   public btnGeberarReporteUsuario : boolean ;
+  public btnGeberarReporteExcelUsuario : boolean ;
+  public btnGenerarReporteHtmlUsuario : boolean ;
 
   map = new Map();
 
@@ -117,6 +119,9 @@ export class UsuarioComponent implements OnInit {
           this.btnEliminarUsuario = Boolean(this.map.get("ELI_USU")) ;
           this.btnReactivarUsuario = Boolean(this.map.get("ACTIV_USU")) ;                    
           this.btnGeberarReporteUsuario= Boolean(this.map.get("REPT_USU")) ;                    
+          this.btnGeberarReporteExcelUsuario= Boolean(this.map.get("REPT_USU_EXCEL")) ;
+          this.btnGenerarReporteHtmlUsuario= Boolean(this.map.get("REPT_USU_HTML")) ;     
+         
         } ); 
  
   }

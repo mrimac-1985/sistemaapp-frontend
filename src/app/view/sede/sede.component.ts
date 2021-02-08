@@ -47,6 +47,10 @@ export class SedeComponent implements OnInit {
      this.paginator._intl.nextPageLabel ='Página Siguiente';
 
     this.listarSedes(0 , 10)
+
+    /*validar permisos */
+
+    
   }
 
   listarSedes(page: number, side: number) {
