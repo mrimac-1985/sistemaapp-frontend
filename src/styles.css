@@ -6,19 +6,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /*ESTILO PARA EL SNACKBAR*/
 .error.mat-snack-bar-container{
-    background: #cc0000;
-    color: white;
+    background: #ff1919;
+    color: rgb(0, 0, 0);
 }
 
 .exito.mat-snack-bar-container{
     background: #0aa00a;
-    color: white;
+    color: rgb(0, 0, 0);
+    
 }
 
 
 .alerta.mat-snack-bar-container{
     background: #eccc14;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 /*ESTILO PARA EL SNACKBAR*/

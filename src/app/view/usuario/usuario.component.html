@@ -41,31 +41,31 @@
             <div  class="divclasstable" >
                 <mat-table [dataSource]="dataSource" matSort >
                                       
-                    <ng-container matColumnDef="nidoperador" >
-                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo" > Id Usuario</mat-header-cell>
-                        <mat-cell fxFlex="10%"  *matCellDef="let row" class="rowStilo"> {{row.operador.nidoperador}}</mat-cell>
+                    <ng-container matColumnDef="nidoperador"  >
+                        <mat-header-cell  fxFlex="5%"  *matHeaderCellDef mat-sort-header class="headStilo" >Id Usuario</mat-header-cell>
+                        <mat-cell fxFlex="5%"  *matCellDef="let row" class="rowStilo"> {{row.operador.nidoperador}}</mat-cell>
                     </ng-container>
         
                     <ng-container matColumnDef="snumdocu">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Número. Doc. <a href=""></a> </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo">Número. Doc.</mat-header-cell>
                         <mat-cell *matCellDef="let row" class="rowStilo"> {{row.operador.snumdocu}}</mat-cell>
                     </ng-container>
         
                     <ng-container matColumnDef="snombre">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Nombres </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo">Nombres</mat-header-cell>
                         <mat-cell *matCellDef="let row" class="rowStilo"> {{row.operador.snombre}} {{row.operador.sapepaterno}} {{row.operador.sapematerno}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="slogin">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Login </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo">Login</mat-header-cell>
                         <mat-cell *matCellDef="let row" class="rowStilo"> {{row.operador.usuario.slogin}}</mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="dfechareg">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Fecha Registro </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo">Fecha Registro</mat-header-cell>
                         <mat-cell *matCellDef="let row" class="rowStilo"> {{row.operador.dfechareg | date:'yyyy-MM-dd  hh:mm a'}}</mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="estado">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo"> Estado </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="headStilo">Estado</mat-header-cell>
                         <mat-cell   *matCellDef="let row" class="rowStilo" [ngClass]="row.operador.estado == 'DESACTIVADO' ? 'Desctivado' : 'Activado'" > {{row.operador.estado}}</mat-cell>
                     </ng-container>
 
